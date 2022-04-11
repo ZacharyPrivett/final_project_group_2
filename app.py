@@ -1,4 +1,7 @@
 from flask import Flask, redirect, render_template, request
+from notes_repository import note_repository_singleton
+from models import db
+
 
 app = Flask(__name__)
 
@@ -21,4 +24,12 @@ def create_notes():
 
     create_notes = note_repository_singleton.create_notes(title, course, description, notes)
     return redirect(f'/notes/')
+
+@app.get('/search')
+def search_notes():
+    found_notes = []
+    q = request.args.get('q', '')
+    if q != '':
+        found_notes = note_repository_singleton.search_notes(q)
+    return render_template('search_notes.html', search_active=True, movies=found_notes, search_query=q)
 
