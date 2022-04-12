@@ -6,8 +6,8 @@ USE notes;
 
 CREATE TABLE IF NOT EXISTS users(
 	user_id INT AUTO_INCREMENT,
-    username VARCHAR(20) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    username VARCHAR(20) NOT NULL UNiQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     pw VARCHAR(255) NOT NULL,
     PRIMARY KEY(user_id)
     );
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS note(
 
 CREATE TABLE IF NOT EXISTS courses(
     course_id INT AUTO_INCREMENT,
-    course VARCHAR(255) NOT NULL,
+    course VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS comments(
