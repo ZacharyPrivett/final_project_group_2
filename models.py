@@ -7,7 +7,7 @@ class Users(db.Model):
     user_id = db.column(db.Integer, primary_key=True)
     username = db.column(db.String, nullable = False, unqiue = True)
     email = db.column(db.String, nullable = False, unique = True)
-    password = db.column(db.String, nullable = False)
+    pw = db.column(db.String, nullable = False)
 
 class Notes(db.Model):
     note_id = db.column(db.Integer, primary_key = True)
@@ -19,7 +19,7 @@ class Notes(db.Model):
 
 class Courses(db.Model):
     course_id = db.column(db.Integer, primary_key = True)
-    title = db.column(db.String, nullable = False)
+    course = db.column(db.String, nullable = False)
     
 class Comments(db.Model):
     comment_id = db.column(db.Integer, primary_key = True)
