@@ -6,6 +6,11 @@ class NoteRepository:
         all_notes = Notes.query.all()
         return all_notes
 
+
+    def search_notes(self, title):
+        search = "%{}%".format(title)
+        pos_notes = Note.query.filter(Note.title.like(search)).all()
+
     def get_note_by_id(self, note_id):
         return Notes.query.filter(Notes.note_id == note_id).first()
 
@@ -22,6 +27,5 @@ class NoteRepository:
     def search_by_course(self, course):
         course_id = Courses.query.filter(Courses.title.ilike(f'%{course}%')).first()
         return Notes.query.filter(Notes.course_id == course_id).all()
-
 
 note_repository_singleton = NoteRepository()
