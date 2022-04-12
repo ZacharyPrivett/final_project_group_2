@@ -1,12 +1,12 @@
 from click import password_option
 from flask_sqlalchemy import SQLAlchemy
 
-db=SQLAlchemy()
+db = SQLAlchemy()
 
 class Users(db.Model):
     user_id = db.column(db.Integer, primary_key=True)
-    username = db.column(db.String, nullable = False)
-    email = db.column(db.String, nullable = False)
+    username = db.column(db.String, nullable = False, unqiue = True)
+    email = db.column(db.String, nullable = False, unique = True)
     password = db.column(db.String, nullable = False)
 
 class Notes(db.Model):
@@ -19,7 +19,7 @@ class Notes(db.Model):
 
 class Courses(db.Model):
     course_id = db.column(db.Integer, primary_key = True)
-    title = db.column(db.String)
+    title = db.column(db.String, nullable = False)
     
 class Comments(db.Model):
     comment_id = db.column(db.Integer, primary_key = True)
@@ -27,4 +27,3 @@ class Comments(db.Model):
     timestamp = db.column(db.DateTime, nullable = False)
     commenter_id = db.column(db.Integer, db.ForeignKey('Users.user_id'), nullable = False)
     thread_id = db.column(db.String, db.ForeignKey('Notes.note_id'), nullable = False)
-    
