@@ -6,10 +6,14 @@ class NoteRepository:
         all_notes = Notes.query.all()
         return all_notes
 
+    def create_note(self, title, course, description, notes):
+        new_notes = Notes(title=title, course=course, description=description, notes=notes)
+        db.sesion.add(new_notes)
+        db.sesion.commit()
 
     def search_notes(self, title):
         search = "%{}%".format(title)
-        pos_notes = Note.query.filter(Note.title.like(search)).all()
+        pos_notes = Notes.query.filter(Notes.title.like(search)).all()
 
     def get_note_by_id(self, note_id):
         return Notes.query.filter(Notes.note_id == note_id).first()
