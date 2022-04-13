@@ -38,3 +38,6 @@ def view_all_notes():
     all_notes = note_repository_singleton.get_all_notes()
     return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes)
 
+@app.get('/about')
+def about():
+    return render_template('about.html')
