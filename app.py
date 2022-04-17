@@ -2,9 +2,9 @@ from flask import Flask, redirect, render_template, request
 from notes_repository import note_repository_singleton
 from models import db
 import os
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-#load_dotenv()
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -37,12 +37,11 @@ def signup():
 def create_notes():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
-
-    #i changed these two lines of code for this to work for me
     description = request.form.get('description', '')
     notes = request.form.get('notes', '')
-    create_notes = note_repository_singleton.create_notes(title, course, description, notes)
-    return redirect(f'/notes/')
+
+    created_notes = note_repository_singleton.create_notes(title, course, description, notes)
+    return render_template('add_notes.html', search_active=True, new_notes=created_notes)
 
 @app.get('/dashboard')
 def dashboard():
