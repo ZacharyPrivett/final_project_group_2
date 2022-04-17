@@ -39,9 +39,9 @@ def create_notes():
     course = request.form.get('course', '')
     description = request.form.get('description', '')
     notes = request.form.get('notes', '')
-
     created_notes = note_repository_singleton.create_notes(title, course, description, notes)
     return render_template('add_notes.html', search_active=True, new_notes=created_notes)
+
 
 @app.get('/dashboard')
 def dashboard():
