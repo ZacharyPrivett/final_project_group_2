@@ -22,8 +22,8 @@ def index():
 def create_notes():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
-    description = request.get('description', '')
-    notes = request.get('notes', '')
+    description = request.form.get('description', '')
+    notes = request.form.get('notes', '')
 
     create_notes = note_repository_singleton.create_notes(title, course, description, notes)
     return redirect(f'/notes/')
