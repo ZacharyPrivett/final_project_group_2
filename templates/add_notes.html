@@ -26,4 +26,15 @@
         <button type="submit" class="btn btn-primary">Add Notes</button>
     </div>
 </form>
+
+{% if new_notes != '' %}
+<p>Notes submition confirmed</p>
+
+{% for note in notes %}
+<table>
+    <tr>
+        <th>{ note.title }</th>
+    </tr>
+</table>
+{% end for %}
 {% endblock %}
