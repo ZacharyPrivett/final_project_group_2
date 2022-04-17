@@ -25,8 +25,8 @@ def create_notes():
     description = request.get('description', '')
     notes = request.get('notes', '')
 
-    create_notes = note_repository_singleton.create_notes(title, course, description, notes)
-    return redirect(f'/notes/')
+    created_notes = note_repository_singleton.create_notes(title, course, description, notes)
+    return render_template('add_notes.html', search_active=True, new_notes=created_notes)
 
 
 @app.get('/search')
