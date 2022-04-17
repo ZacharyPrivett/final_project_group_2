@@ -38,206 +38,166 @@
             rgba(91, 14, 214, 0.5) 100%;
             opacity: 0.5;
         }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+}
+
+.scrollbar-deep-purple::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-deep-purple::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-deep-purple::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #512da8;
+}
+
+.scrollbar-deep-purple {
+    scrollbar-color: #512da8 #F5F5F5;
+}
+
+.scrollbar-cyan::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-cyan::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-cyan::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #00bcd4;
+}
+
+.scrollbar-cyan {
+    scrollbar-color: #00bcd4 #F5F5F5;
+}
+
+.scrollbar-dusty-grass::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-dusty-grass::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-dusty-grass::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-image: -webkit-linear-gradient(330deg, #d4fc79 0%, #96e6a1 100%);
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+.scrollbar-ripe-malinka::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-ripe-malinka::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-ripe-malinka::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-image: -webkit-linear-gradient(330deg, #f093fb 0%, #f5576c 100%);
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bordered-deep-purple::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: 1px solid #512da8;
+}
+
+.bordered-deep-purple::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none;
+}
+
+.bordered-cyan::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: 1px solid #00bcd4;
+}
+
+.bordered-cyan::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none;
+}
+
+.square::-webkit-scrollbar-track {
+    border-radius: 0 !important;
+}
+
+.square::-webkit-scrollbar-thumb {
+    border-radius: 0 !important;
+}
+
+.thin::-webkit-scrollbar {
+    width: 6px;
+}
+
+.example-1 {
+    position: relative;
+    overflow-y: scroll;
+    height: 700px;
+}
       </style> 
 
-<h1>About page</h1>
-<img src="https://mdbootstrap.com/img/new/standard/city/078.webp" class="w-100" alt="Alternative text"/>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus quas consequatur fugiat illo quasi, consectetur quae esse id nesciunt accusantium eius distinctio ea quibusdam minima consequuntur ex labore sunt nemo.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus quas consequatur fugiat illo quasi, consectetur quae esse id nesciunt accusantium eius distinctio ea quibusdam minima consequuntur ex labore sunt nemo.</p>
-<h1>Team Members</h1>
 
-<!-- TEAM MEMBER #1--> 
-<Div class="element_2">          
-    <!-- image div starts here: found how to do zoom on hover: https://mdbootstrap.com/docs/standard/content-styles/hover-effects/ -->
-    <!-- links-->
-    <!-- https://stackoverflow.com/questions/42859313/hover-effects-in-bootstrap-->
-    <!-- https://original.newsbreak.com/@cyberbotmachines-1588956/2361410518094-how-to-align-text-and-image-in-same-line-in-html-->
-    
-    <div class="col-lg-5 col-md-7 col-sm-7 col-xs-5">
-        <a class="thumbnail" title="team member" >
-            <img
-            src="https://mdbootstrap.com/img/new/standard/city/078.webp"
-            class="w-100"
-            alt="Alternative text"
-            />
-        </a>
-    </div> 
-        <!-- end of image div-->
-    <div >
-        <ul class="list-unstyled">
-            <h1>Team Member #1</h1>
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Integer molestie lorem at massa</li>
-            <li>Facilisis in pretium nisl aliquet</li>
-            <li>Nulla volutpat aliquam velit
-            <li>Phasellus iaculis neque</li>
-            <li>Purus sodales ultricies</li>
-           
-        </ul>
-    </div>
-</Div>
+<section class="vh-100 bg-image" style="background-image: url('https://media0.giphy.com/media/9xm2CFwwSt034l8NQt/giphy.gif?cid=790b76110e9dcbc9f2952b740eec74f52db9505879908566&rid=giphy.gif&ct=g');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center ">About Us</h2>
 
-<!-- TEAM MEMBER #2-->
-<Div class="element">          
-    <!-- image div starts here: found how to do zoom on hover: https://mdbootstrap.com/docs/standard/content-styles/hover-effects/ -->
-    <!-- links-->
-    <!-- https://stackoverflow.com/questions/42859313/hover-effects-in-bootstrap-->
-    <!-- https://original.newsbreak.com/@cyberbotmachines-1588956/2361410518094-how-to-align-text-and-image-in-same-line-in-html-->
-    
-    <div class="col-lg-5 col-md-7 col-sm-7 col-xs-5">
-        <a class="thumbnail" title="team member" >
-            <img
-            src="https://mdbootstrap.com/img/new/standard/city/078.webp"
-            class="w-100"
-            alt="Alternative text"
-            />
-        </a>
-    </div> 
-        <!-- end of image div-->
-    <div >
-        <ul class="list-unstyled">
-            <h1>Team Member #2</h1>
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Integer molestie lorem at massa</li>
-            <li>Facilisis in pretium nisl aliquet</li>
-            <li>Nulla volutpat aliquam velit
-            <li>Phasellus iaculis neque</li>
-            <li>Purus sodales ultricies</li>
-           
-        </ul>
+              <!-- Exaple 1 -->
+                <div class="card example-1 scrollbar-ripe-malinka">
+                  <div class="card-body">
+                    <h4 id="section1"><strong>better notes better grades lol</strong></h4>
+                    <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+                      qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+                      mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+                      qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+                      Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+                    <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+                      qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+                      mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+                      qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+                      Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+                  </div>
+                </div>
+                <!-- Exaple 1 -->
+              
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</Div>
-<!-- TEAM MEMBER #3-->
-<Div class="element">          
-    <!-- image div starts here: found how to do zoom on hover: https://mdbootstrap.com/docs/standard/content-styles/hover-effects/ -->
-    <!-- links-->
-    <!-- https://stackoverflow.com/questions/42859313/hover-effects-in-bootstrap-->
-    <!-- https://original.newsbreak.com/@cyberbotmachines-1588956/2361410518094-how-to-align-text-and-image-in-same-line-in-html-->
-    
-    <div class="col-lg-5 col-md-7 col-sm-7 col-xs-5">
-        <a class="thumbnail" title="team member" >
-            <img
-            src="https://mdbootstrap.com/img/new/standard/city/078.webp"
-            class="w-100"
-            alt="Alternative text"
-            />
-        </a>
-    </div> 
-        <!-- end of image div-->
-    <div >
-        <ul class="list-unstyled">
-            <h1>Team Member #3</h1>
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Integer molestie lorem at massa</li>
-            <li>Facilisis in pretium nisl aliquet</li>
-            <li>Nulla volutpat aliquam velit
-            <li>Phasellus iaculis neque</li>
-            <li>Purus sodales ultricies</li>
-            
-        </ul>
-    </div>
-</Div>
-<!-- TEAM MEMBER #4-->
-<Div class="element">          
-    <!-- image div starts here: found how to do zoom on hover: https://mdbootstrap.com/docs/standard/content-styles/hover-effects/ -->
-    <!-- links-->
-    <!-- https://stackoverflow.com/questions/42859313/hover-effects-in-bootstrap-->
-    <!-- https://original.newsbreak.com/@cyberbotmachines-1588956/2361410518094-how-to-align-text-and-image-in-same-line-in-html-->
-    
-    <div class="col-lg-5 col-md-7 col-sm-7 col-xs-5">
-        <a class="thumbnail" title="team member" >
-            <img
-            src="https://mdbootstrap.com/img/new/standard/city/078.webp"
-            class="w-100"
-            alt="Alternative text"
-            />
-        </a>
-    </div> 
-        <!-- end of image div-->
-    <div >
-        <ul class="list-unstyled">
-            <h1>Team Member #4</h1>
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Integer molestie lorem at massa</li>
-            <li>Facilisis in pretium nisl aliquet</li>
-            <li>Nulla volutpat aliquam velit
-            <li>Phasellus iaculis neque</li>
-            <li>Purus sodales ultricies</li>
-            
-            
-        </ul>
-    </div>
-</Div>
+  </div>
+</section>
 
-<!-- TEAM MEMBER #5-->
-<Div class="element">          
-    <!-- image div starts here: found how to do zoom on hover: https://mdbootstrap.com/docs/standard/content-styles/hover-effects/ -->
-    <!-- links-->
-    <!-- https://stackoverflow.com/questions/42859313/hover-effects-in-bootstrap-->
-    <!-- https://original.newsbreak.com/@cyberbotmachines-1588956/2361410518094-how-to-align-text-and-image-in-same-line-in-html-->
-    
-    <div class="col-lg-5 col-md-7 col-sm-7 col-xs-5">
-        <a class="thumbnail" title="team member" >
-            <img
-            src="https://mdbootstrap.com/img/new/standard/city/078.webp"
-            class="w-100"
-            alt="Alternative text"
-            />
-        </a>
-    </div> 
-        <!-- end of image div-->
-    <div >
-        <ul class="list-unstyled">
-            <h1>Team Member #5</h1>
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Integer molestie lorem at massa</li>
-            <li>Facilisis in pretium nisl aliquet</li>
-            <li>Nulla volutpat aliquam velit
-            <li>Phasellus iaculis neque</li>
-            <li>Purus sodales ultricies</li>
-            
-            
-        </ul>
-    </div>
-</Div>
 
-<!-- TEAM MEMBER #6-->
-<Div class="element">          
-    <!-- image div starts here: found how to do zoom on hover: https://mdbootstrap.com/docs/standard/content-styles/hover-effects/ -->
-    <!-- links-->
-    <!-- https://stackoverflow.com/questions/42859313/hover-effects-in-bootstrap-->
-    <!-- https://original.newsbreak.com/@cyberbotmachines-1588956/2361410518094-how-to-align-text-and-image-in-same-line-in-html-->
-    
-    <div class="col-lg-5 col-md-7 col-sm-7 col-xs-5">
-        <a class="thumbnail" title="team member" >
-            <img
-            src="https://mdbootstrap.com/img/new/standard/city/078.webp"
-            class="w-100"
-            alt="Alternative text"
-            />
-        </a>
-    </div> 
-        <!-- end of image div-->
-    <div >
-        <ul class="list-unstyled">
-            <h1>Team Member #6</h1>
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Integer molestie lorem at massa</li>
-            <li>Facilisis in pretium nisl aliquet</li>
-            <li>Nulla volutpat aliquam velit
-            <li>Phasellus iaculis neque</li>
-            <li>Purus sodales ultricies</li>
-            
-            
-        </ul>
-    </div>
-</Div>
+
 </body>
 
 {% endblock %}

@@ -18,17 +18,36 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
+
+
+@app.get('/add_notes')
+def add_notes():
+    return render_template('add_notes.html')
+
+@app.get('/login')
+def login():
+    return render_template('login.html')
+
+
+@app.get('/signup')
+def signup():
+    return render_template('signup_page.html')
+
 @app.get('/notes')
 def create_notes():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
     description = request.form.get('description', '')
     notes = request.form.get('notes', '')
-
     created_notes = note_repository_singleton.create_notes(title, course, description, notes)
     return render_template('add_notes.html', search_active=True, new_notes=created_notes)
 
 
+@app.get('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+  
 @app.get('/search')
 def search_notes():
     found_notes = []
@@ -45,3 +64,7 @@ def view_all_notes():
 @app.get('/about')
 def about():
     return render_template('about.html')
+
+@app.get('/single_note')
+def single_note():
+    return render_template('single_note_page.html')
