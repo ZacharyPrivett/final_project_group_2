@@ -37,6 +37,7 @@ def signup():
 def create_notes():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
+
     #i changed these two lines of code for this to work for me
     description = request.form.get('description', '')
     notes = request.form.get('notes', '')
@@ -47,7 +48,7 @@ def create_notes():
 def dashboard():
     return render_template('dashboard.html')
 
-
+ 
 @app.get('/search')
 def search_notes():
     found_notes = []
