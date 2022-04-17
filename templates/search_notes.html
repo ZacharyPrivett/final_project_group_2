@@ -3,43 +3,65 @@
 {% block title %}Search Notes{% endblock %}
 
 {% block body %}
-<h1 class="mb-5">Search Notes</h1>
-<form action="/search" method="get" class="mb-5">
-  <label for="q" class="form-label">Search by title</label>  
-  <div class="input-group">
-    <input type="text" name="q" id="q" class="form-control" autocomplete="off" required>
-    <div class="input-group-append">
-      <button type="submit" class="btn btn-primary">Search</button>
+<section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/26mkhTKYBbyy8904g/giphy.gif?cid=790b7611af2cc6bd64265faa1f01c20c3ec48928f42f394b&rid=giphy.gif&ct=g');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+
+              <!-- search notes code-->
+              <h1 class="mb-5">Search Notes</h1>
+              <form action="/search" method="get" class="mb-5">
+                <label for="q" class="form-label">Search by title</label>  
+                <div class="input-group">
+                  <input type="text" name="q" id="q" class="form-control" autocomplete="off" required>
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </div>
+              </form>
+              <!-- If q is passed to the template, we did a search already -->
+              {% if search_query != '' %}
+              {% if movies|length != 0 %}
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Notes</th>
+                    <th>Creator</th>
+                    <th>Course</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for note in notes %}
+                    <tr>
+                      <td><a href="/notes/{{ note.note_id }}">{{ note.title }}</a></td>
+                      <td>{{ note.description }}</td>
+                      <td>{{ note.notes }}</td>
+                      <td>{{ note.creator_id }}</td>
+                      <td>{{ note.course_id }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% else %}
+              <p>No notes found</p>
+              {% endif %}
+              {% endif %}
+              <!-- search notes code ends here-->
+            </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</form>
-<!-- If q is passed to the template, we did a search already -->
-{% if search_query != '' %}
-{% if movies|length != 0 %}
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Notes</th>
-      <th>Creator</th>
-      <th>Course</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for note in notes %}
-      <tr>
-        <td><a href="/notes/{{ note.note_id }}">{{ note.title }}</a></td>
-        <td>{{ note.description }}</td>
-        <td>{{ note.notes }}</td>
-        <td>{{ note.creator_id }}</td>
-        <td>{{ note.course_id }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% else %}
-<p>No notes found</p>
-{% endif %}
-{% endif %}
+</section>
+
+
 {% endblock %}
