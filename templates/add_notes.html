@@ -3,10 +3,10 @@
 {% block title %}Add Notes{% endblock %}
 
 {% block body %}
-<h1>Add notes</h1>
+<h1 class="mt-5">Add notes</h1>
 <p></p>
-<form action="/notes" method="post">
-    <div class="mb-3">
+<form action="/notes" method="get">
+    <div class="mb-3 mt-5">
         <label for="title" class="form-lable">Post Title</label>
         <input type="text" name="title" id="title" class="form-control" autocomplete="off" required>
     </div>
@@ -15,26 +15,18 @@
         <input type="text" name="course" id="course" class="form-control" autocomplete="off" required>
     </div>
     <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input type="text" name="description" id="description" class="form-control" autocomplete="off" required>
+        <label for="descript" class="form-label">Description</label>
+        <input type="text" name="descript" id="descript" class="form-control" autocomplete="off" required>
     </div>
-    <div class="mb-3">
-        <label for="notes" class="form-label">Notes</label>
-        <input type="text" name="notes" id="notes" class="form-control" autocomplete="off" required>
+    <div class="mb-3 col-xs-4">
+        <label for="content" class="form-label">Notes</label>
+        <textarea type="text" name="content" id="content" class="form-control" rows="8" autocomplete="off" required></textarea>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Add Notes</button>
+        <button type="submit" class="btn btn-primary mb-6">Add Notes</button>
     </div>
 </form>
 
-{% if new_notes != '' %}
-<p>Notes submition confirmed</p>
 
-{% for note in notes %}
-<table>
-    <tr>
-        <th>{ note.title }</th>
-    </tr>
-</table>
-{% end for %}
+
 {% endblock %}

@@ -19,9 +19,6 @@ def index():
     return render_template('index.html')
 
 
-
-
-
 @app.get('/login')
 def login():
     return render_template('login.html')
@@ -35,9 +32,10 @@ def signup():
 def create_note():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
-    description = request.form.get('description', '')
-    notes = request.form.get('notes', '')
-    created_notes = note_repository_singleton.create_notes(title, course, description, notes)
+    descript = request.form.get('descript', '')
+    content = request.form.get('content', '')
+    creator_id = 1  # so code doesnt break. Will update when we have login made
+    created_notes = note_repository_singleton.create_note(title, course, descript, content, creator_id)
     return render_template('add_notes.html', search_active=True, new_notes=created_notes)
 
 
