@@ -20,9 +20,7 @@ def index():
 
 
 
-@app.get('/add_notes')
-def add_notes():
-    return render_template('add_notes.html')
+
 
 @app.get('/login')
 def login():
