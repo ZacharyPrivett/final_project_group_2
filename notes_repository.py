@@ -10,10 +10,12 @@ class NoteRepository:
         new_notes = Notes(title=title, course=course, description=description, notes=notes)
         db.sesion.add(new_notes)
         db.sesion.commit()
+        return new_notes
 
     def search_notes(self, title):
         search = "%{}%".format(title)
         pos_notes = Notes.query.filter(Notes.title.like(search)).all()
+        return pos_notes
 
     def get_note_by_id(self, note_id):
         return Notes.query.filter(Notes.note_id == note_id).first()

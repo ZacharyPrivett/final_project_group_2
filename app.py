@@ -32,7 +32,7 @@ def signup():
     return render_template('signup_page.html')
 
 @app.get('/notes')
-def create_notes():
+def create_note():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
     description = request.form.get('description', '')
