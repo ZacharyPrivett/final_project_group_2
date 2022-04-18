@@ -12,15 +12,11 @@ class Users(db.Model):
 class Notes(db.Model):
     note_id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String, nullable = False)
-    description = db.Column(db.String, nullable = False)
-    content = db.Column(db.String, nullable = False)
-    course_id = db.Column(db.String, db.ForeignKey('Courses.course_id'), nullable = False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable = False)
-
-class Courses(db.Model):
-    course_id = db.Column(db.Integer, primary_key = True)
     course = db.Column(db.String, nullable = False)
-    
+    descript = db.Column(db.String, nullable = False)
+    content = db.Column(db.String, nullable = False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable = True)
+
 class Comments(db.Model):
     comment_id = db.Column(db.Integer, primary_key = True)
     content = db.Column(db.String, nullable = False)

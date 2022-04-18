@@ -1,4 +1,4 @@
-from models import Users, Notes, Courses, Comments, db
+from models import Users, Notes, Comments, db
 
 class NoteRepository:
 
@@ -6,10 +6,9 @@ class NoteRepository:
         all_notes = Notes.query.all()
         return all_notes
 
-    def create_note(self, title, course, description, notes):
-        new_notes = Notes(title=title, course=course, description=description, notes=notes)
-        db.sesion.add(new_notes)
-        db.sesion.commit()
+    def create_note(self, title, course, descript, content, creator_id):
+        new_notes = Notes(title=title, course=course, descript=descript, content=content, creator_id=creator_id)
+   
         return new_notes
 
     def search_notes(self, title):
