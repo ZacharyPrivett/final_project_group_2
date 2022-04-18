@@ -43,14 +43,13 @@ def create_note():
 def dashboard():
     return render_template('dashboard.html')
 
-  
 @app.get('/search')
 def search_notes():
     found_notes = []
     q = request.args.get('q', '')
     if q != '':
-        found_notes = note_repository_singleton.search_notes(q)
-    return render_template('search_notes.html', search_active=True, movies=found_notes, search_query=q)
+        found_notes = note_repository_singleton.search_by_title(q)
+    return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q)
 
 @app.get('/notes/list')
 def view_all_notes():

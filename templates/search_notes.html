@@ -24,7 +24,7 @@
               </form>
               <!-- If q is passed to the template, we did a search already -->
               {% if search_query != '' %}
-              {% if movies|length != 0 %}
+              {% if notes|length != 0 %}
               <table class="table">
                 <thead>
                   <tr>
@@ -42,7 +42,7 @@
                       <td>{{ note.description }}</td>
                       <td>{{ note.notes }}</td>
                       <td>{{ note.creator_id }}</td>
-                      <td>{{ note.course_id }}</td>
+                      <td>{{ note.course }}</td>
                     </tr>
                   {% endfor %}
                 </tbody>
