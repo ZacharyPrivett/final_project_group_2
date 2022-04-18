@@ -43,7 +43,6 @@ def create_note():
 def dashboard():
     return render_template('dashboard.html')
 
-  
 @app.get('/search')
 def search_notes():
     found_notes = []
