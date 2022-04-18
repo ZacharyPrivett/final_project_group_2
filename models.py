@@ -9,15 +9,12 @@ class Users(db.Model):
     pw = db.Column(db.String, nullable=False)
 
 class Note(db.Model):
-
-   
-
     note_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     course = db.Column(db.String, nullable=False)
     descript = db.Column(db.String, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=True)
+    #creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=True)
 
 class Comments(db.Model):
     comment_id = db.Column(db.Integer, primary_key=True)

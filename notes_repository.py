@@ -6,10 +6,10 @@ class NoteRepository:
         all_notes = Note.query.all()
         return all_notes
 
-    def create_note(self, title, course, descript, content, creator_id):
-        new_notes = Note(title=title, course=course, descript=descript, content=content, creator_id=creator_id)     
-        db.sesion.add(new_notes)
-        db.sesion.commit()
+    def create_note(self, title, course, descript, content):#, creator_id):
+        new_notes = Note(title=title, course=course, descript=descript, content=content)#, creator_id=creator_id)    
+        db.session.add(new_notes)
+        db.session.commit()
         return new_notes
 
     def get_note_by_id(self, note_id):
