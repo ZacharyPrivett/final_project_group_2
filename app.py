@@ -38,7 +38,7 @@ def create_note():
     if title == '' or course == '' or descript == '' or content == '':
         os.abort(400)
     created_notes = note_repository_singleton.create_note(title, course, descript, content, creator_id)
-    return render_template('add_notes.html', search_active=True, new_notes=created_notes)
+    return render_template('add_notes.html', search_active=True, created_notes=created_notes)
 
 
 @app.get('/dashboard')
