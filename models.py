@@ -9,17 +9,17 @@ class Users(db.Model):
     email = db.Column(db.String, unique = True, nullable = False)
     pw = db.Column(db.String, nullable = False)
 
-class Notes(db.Model):
+class Note(db.Model):
     note_id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String, nullable = False)
     course = db.Column(db.String, nullable = False)
     descript = db.Column(db.String, nullable = False)
     content = db.Column(db.String, nullable = False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable = True)
-
+    creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable = False)
+    
 class Comments(db.Model):
     comment_id = db.Column(db.Integer, primary_key = True)
     content = db.Column(db.String, nullable = False)
-    timestamp = db.Column(db.DateTime, nullable = False)
+    time_stamp = db.Column(db.DateTime, nullable = False)
     commenter_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable = False)
     thread_id = db.Column(db.String, db.ForeignKey('Notes.note_id'), nullable = False)
