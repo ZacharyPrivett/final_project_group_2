@@ -28,25 +28,17 @@ def login():
 def signup():
     return render_template('signup_page.html')
 
-<<<<<<< single_note
+
 @app.get('/single_note/<note_id>')
 def single_note(note_id):
-
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    
-    print(single_note)
-    
-
     return render_template('single_note_page.html', note=single_note)
 
-@app.get('/notes')
-=======
 @app.get('/notes/new')
 def create_movies_form():
     return render_template('add_notes.html', add_notes_active=True)
 
 @app.post('/notes')
->>>>>>> main
 def create_note():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
