@@ -3,6 +3,7 @@
 {% block title %}View All Notes{% endblock %}
 
 {% block body %}
+<<<<<<< single_note
 <section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/l3q2Et4jH2l7YC5Nu/giphy.gif?cid=790b76119facb0a2013292b0c2c5a0c7e71c91a5559c7459&rid=giphy.gif&ct=g');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
       <div class="container h-100">
@@ -52,5 +53,29 @@
 
  
 
+=======
+<h1 class="mb-5">All Notes</h1>
+<p class="mb-3">Your list of notes below</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Note Title</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for note in notes %}
+            <tr>
+                <td><a href="/notes/list/{{ notes.notes_id }}">{{ note.title }}</a></td>
+                <td>{{ note.course }}</td>
+                <td>{{ note.creator_id }}</td>
+                <td>{{ note.descript }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+>>>>>>> main
 
 {% endblock %}

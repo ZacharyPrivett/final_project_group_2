@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 from notes_repository import note_repository_singleton
 from models import db
 import os
@@ -28,6 +28,7 @@ def login():
 def signup():
     return render_template('signup_page.html')
 
+<<<<<<< single_note
 @app.get('/single_note/<note_id>')
 def single_note(note_id):
 
@@ -39,14 +40,21 @@ def single_note(note_id):
     return render_template('single_note_page.html', note=single_note)
 
 @app.get('/notes')
+=======
+@app.get('/notes/new')
+def create_movies_form():
+    return render_template('add_notes.html', add_notes_active=True)
+
+@app.post('/notes')
+>>>>>>> main
 def create_note():
     title = request.form.get('title', '')
     course = request.form.get('course', '')
     descript = request.form.get('descript', '')
     content = request.form.get('content', '')
     #creator_id = 1  # so code doesnt break. Will update when we have login made
-    created_notes = note_repository_singleton.create_note(title, course, descript, content)#, creator_id)
-    return render_template('add_notes.html', created_notes=created_notes)
+    note_repository_singleton.create_note(title, course, descript, content)#, creator_id)
+    return redirect('/notes/new')
 
 
 @app.get('/dashboard')
