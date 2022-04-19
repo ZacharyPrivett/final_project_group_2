@@ -1,148 +1,56 @@
 {% extends '_layout.html' %}
 
-{% block title %}single note page{% endblock %}
+{% block title %}single note page {% endblock %}
 
 {% block body %}
-<section class="vh-100 bg-image" style="background-image: url('https://media0.giphy.com/media/9xm2CFwwSt034l8NQt/giphy.gif?cid=790b76110e9dcbc9f2952b740eec74f52db9505879908566&rid=giphy.gif&ct=g');">
-  <table class="table align-middle mb-0 bg-white">
-    <thead class="bg-light">
-      <tr>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Position</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                alt=""
-                style="width: 45px; height: 45px"
-                class="rounded-circle"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">John Doe</p>
-              <p class="text-muted mb-0">john.doe@gmail.com</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">Software engineer</p>
-          <p class="text-muted mb-0">IT department</p>
-        </td>
-        <td>
-          <span class="badge badge-success rounded-pill d-inline">Active</span>
-        </td>
-        <td>Senior</td>
-        <td>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
-            Edit
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                class="rounded-circle"
-                alt=""
-                style="width: 45px; height: 45px"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">Alex Ray</p>
-              <p class="text-muted mb-0">alex.ray@gmail.com</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">Consultant</p>
-          <p class="text-muted mb-0">Finance</p>
-        </td>
-        <td>
-          <span class="badge badge-primary rounded-pill d-inline"
-                >Onboarding</span
-            >
-        </td>
-        <td>Junior</td>
-        <td>
-          <button
-                  type="button"
-                  class="btn btn-link btn-rounded btn-sm fw-bold"
-                  data-mdb-ripple-color="dark"
-                  >
-            Edit
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                class="rounded-circle"
-                alt=""
-                style="width: 45px; height: 45px"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">Kate Hunington</p>
-              <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">Designer</p>
-          <p class="text-muted mb-0">UI/UX</p>
-        </td>
-        <td>
-          <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-        </td>
-        <td>Senior</td>
-        <td>
-          <button
-                  type="button"
-                  class="btn btn-link btn-rounded btn-sm fw-bold"
-                  data-mdb-ripple-color="dark"
-                  >
-            Edit
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <!-- make a get call for the ionformation on the notes-->
-    <div class="">
-      <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-lg-10 ">
-            <div class="card" style="border-radius: 15px;">
-              <div class="card-body p-5">
 
-                
-                <h2 class="text-uppercase text-center mb-5">Notes</h2>
-                
-                
-                
-
-              </div>
-
+<section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/19uOTUBLyvVkkxA5x3/giphy.gif?cid=ecf05e47ok8kcl9so4r3qztpnfsynwkl1v0aqvrut8jblxdf&rid=giphy.gif&ct=g');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-10 col-xl-10">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-10">
               
-
-  
+              <!-- start of single notes code -->
+              <div>
+                <p class="mb-3">notes</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Note Title</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                              <tr>
+                                  <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
+                                  <td>{{ note.course }}</td>
+                                  <td>{{ note.creator_id }}</td>
+                                  <td>{{ note.description }}</td>
+                              </tr>
+                    </tbody>
+                </table>
+              
+                <div class="mb-3 col-xs-4">
+                  <label for="content" class="form-label">{{ note.title }}</label>
+                  <p type="text" name="content" id="content" class="form-control" rows="8" autocomplete="off" required>
+                    {{ note.content }}
+                  </p>
+                </div>
               </div>
-            </div>
+              <!-- end of single notes code-->
 
-            
+            </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
-  </section>
+  </div>
+</section>
+
 
 {% endblock %}
