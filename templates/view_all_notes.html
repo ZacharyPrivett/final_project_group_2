@@ -31,7 +31,7 @@
                                     <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
                                     <td>{{ note.course }}</td>
                                     <td>{{ note.creator_id }}</td>
-                                    <td>{{ note.description }}</td>
+                                    <td>{{ note.descript }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -50,32 +50,5 @@
       </div>
     </div>
   </section>
-
- 
-
-=======
-<h1 class="mb-5">All Notes</h1>
-<p class="mb-3">Your list of notes below</p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Note Title</th>
-            <th scope="col">Course Name</th>
-            <th scope="col">Author</th>
-            <th scope="col">Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for note in notes %}
-            <tr>
-                <td><a href="/notes/list/{{ notes.notes_id }}">{{ note.title }}</a></td>
-                <td>{{ note.course }}</td>
-                <td>{{ note.creator_id }}</td>
-                <td>{{ note.descript }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
->>>>>>> main
 
 {% endblock %}
