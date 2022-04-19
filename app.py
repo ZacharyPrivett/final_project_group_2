@@ -107,7 +107,6 @@ def search_notes():
 @app.get('/single_note/<note_id>')
 def single_note(note_id):
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    print(single_note)
     return render_template('single_note_page.html', note=single_note)
 
 @app.get('/notes/list')
