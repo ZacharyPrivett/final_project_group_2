@@ -13,7 +13,10 @@ class NoteRepository:
         return new_notes
 
     def get_note_by_id(self, note_id):
-        return Note.query.filter(Note.note_id == note_id).first()
+        #just in case
+        #single_note = Note.query.get_or_404(note_id)
+        single_note = Note.query.filter(Note.note_id == note_id).first()
+        return single_note
 
     def get_comments(self, note_id):
         return Comments.query.filter(Comments.thread_id == note_id).all()
