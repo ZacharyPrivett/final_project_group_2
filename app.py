@@ -1,3 +1,4 @@
+from tokenize import String
 from flask import Flask, redirect, render_template, request, session, abort
 from flask_bcrypt import Bcrypt
 from notes_repository import note_repository_singleton, user_repository_singleton 
@@ -100,8 +101,15 @@ def dashboard():
 def search_notes():
     found_notes = []
     q = request.args.get('q', '')
+    filter = request.args.get('filter', '')
     if q != '':
-        found_notes = note_repository_singleton.search_by_title(q)
+        if filter == 'Course':
+            found_notes = note_repository_singleton.search_by_course(q)
+        elif filter == "Author":
+            found_notes = note_repository_singleton.search_by_author(q)
+        else:
+            found_notes = note_repository_singleton.search_by_title(q)
+    
     return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q)
 
 @app.get('/single_note/<note_id>')

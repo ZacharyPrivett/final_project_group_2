@@ -29,7 +29,7 @@ class NoteRepository:
         return Note.query.filter(Note.title.ilike(f'%{title}%')).all()
     
     def search_by_course(self, course):
-        return Note.query.filter(Note.title.ilike(f'%{course}%')).all()
+        return Note.query.filter(Note.course.ilike(f'%{course}%')).all()
 
 note_repository_singleton = NoteRepository()
 
