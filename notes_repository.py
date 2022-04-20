@@ -32,3 +32,16 @@ class NoteRepository:
         return Note.query.filter(Note.title.ilike(f'%{course}%')).all()
 
 note_repository_singleton = NoteRepository()
+
+
+class UserRepository:
+
+    def create_user(self, username, email, password):
+        new_user = Users(username=username, email=email, pw=password)
+        db.session.add(new_user)
+        db.session.commit()
+    
+    def get_user(self, username):
+        return Users.query.filter_by(username=username).first()
+        
+user_repository_singleton = UserRepository()
