@@ -23,9 +23,8 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('index.html')
 
-
 # login
-@app.get('/login')
+@app.post('/login')
 def login():
     username = request.form.get('username', '')
     password = request.form.get('pw', '')
@@ -50,6 +49,29 @@ def login():
 
     return render_template('login.html')
 
+@app.get('/fail')
+def fail():
+    if 'user' in session:
+        return redirect('/success')
+    return render_template('fail.html')
+
+@app.get('/success')
+def success():
+    if not 'user' in session:
+        abort(401)
+    return render_template('dashboard.html', user=session['user']['username'])
+
+
+#logout
+@app.post('/logout')
+def logout():
+    if 'user' not in session:
+        abort(401)
+
+    del session['user']
+
+    return redirect('/')
+
 
 # Signup
 @app.get('/signup')
@@ -58,7 +80,7 @@ def get_signup_page():
         return redirect('/success')
     return render_template('dashboard.html')    
 
-@app.get('/signup')
+@app.post('/signup')
 def signup():
     username = request.form.get('username', '')
     email = request.form.get('email', '')
