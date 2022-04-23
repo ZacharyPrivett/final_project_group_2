@@ -42,6 +42,6 @@ class UserRepository:
         db.session.commit()
     
     def get_user(self, username):
-        return Users.query.filter_by(username=username).first()
+        return Users.query.filter_by(username).first()
         
 user_repository_singleton = UserRepository()
