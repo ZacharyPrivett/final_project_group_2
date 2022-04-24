@@ -166,6 +166,14 @@ def update_notes(note_id):
     db.session.commit()
     return render_template('edit_notes.html', note=note_to_update)
 
+#delete method
+@app.post('/notes/<note_id>/delete')
+def delete_note(note_id):
+    note_to_delete = note_repository_singleton.get_note_by_id(note_id)
+    db.session.delete(note_to_delete)
+    db.session.commit()
+    return redirect('/notes/list')
+
 
 # About
 @app.get('/about')
