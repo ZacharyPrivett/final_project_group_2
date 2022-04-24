@@ -1,5 +1,6 @@
+import re
 from tokenize import String
-from flask import Flask, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort
 from flask_bcrypt import Bcrypt
 from notes_repository import note_repository_singleton, user_repository_singleton 
 from models import db
@@ -14,6 +15,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['SQLALCHEMY_ECHO'] = True
+app.secret_key = os.getenv('SECRET_KEY')
 
 db.init_app(app)
 bcrypt = Bcrypt(app)
@@ -24,6 +26,14 @@ def index():
     return render_template('index.html')
 
 # login
+@app.get('/login/page')
+def get_login_page():
+    if 'user' in session:
+        flash("You are already logged in")
+        return redirect('/dashboard')
+    return render_template('login.html')
+
+
 @app.post('/login')
 def login():
     username = request.form.get('username', '')
@@ -32,12 +42,12 @@ def login():
     if username == '' or password == '':
         abort(400)
 
-    existing_user = user_repository_singleton.get_user 
+    existing_user = user_repository_singleton.get_user(username) 
 
     if not existing_user or existing_user.user_id == 0:
         return redirect('/fail')
 
-    if not bcrypt.check_password_hash(existing_user.password, password):
+    if not bcrypt.check_password_hash(existing_user.pw, password):
         return redirect('/fail')
 
     session['user'] = {
@@ -45,9 +55,9 @@ def login():
         'user_id': existing_user.user_id
     }
 
-    #return redirect('/success')
+    return redirect('/success')
 
-    return render_template('login.html')
+    #return render_template('login.html')
 
 @app.get('/fail')
 def fail():
@@ -63,6 +73,14 @@ def success():
 
 
 #logout
+@app.get('/logout/page')
+def get_logout_page():
+    if 'user' not in session:
+        flash("No user logged in")
+        return render_template('login.html')
+    return render_template('logout.html')
+
+
 @app.post('/logout')
 def logout():
     if 'user' not in session:
@@ -78,27 +96,30 @@ def logout():
 def get_signup_page():
     if 'user' in session:
         return redirect('/success')
-    return render_template('dashboard.html')    
+    return render_template('signup_page.html')    
 
 @app.post('/signup')
 def signup():
     username = request.form.get('username', '')
     email = request.form.get('email', '')
     password = request.form.get('pw', '')
-    repeat_pw = request.get('pw2', '' )
+    repeat_pw = request.form.get('pw2', '' )
 
     if password != repeat_pw or username == '' or password == '' or repeat_pw == '':
         abort(400)
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    new_user = user_repository_singleton.create_user(username, email, hashed_password)
-    return redirect('/dashboard')
+    user_repository_singleton.create_user(username, email, hashed_password)
+    return redirect('/login/page')
 
 
 # Creating new notes
 @app.get('/notes/new')
 def create_note_form():
+    if 'user' not in session:
+        return redirect('/login/page')
+
     return render_template('add_notes.html', add_notes_active=True,)
 
 @app.post('/notes')

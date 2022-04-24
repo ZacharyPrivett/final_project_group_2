@@ -50,50 +50,23 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h2 class="text-uppercase text-center mb-5">Log In</h2>
+                <h2 class="text-uppercase text-center mb-5">Log out</h2>
   
                 
                 
-                <p>Please login to your account</p>
-                <form action="/login" method="post">
-                  <!-- the start Username div-->
-                  <div class="form-outline mb-4">
-                    <input type="text" id="username" name="username" class="form-control" autocomplete="off" required>
-                    <label class="form-label" for="username">Username</label>
-                  </div>
-                  <!-- the End Username password div-->
+                <p>Are you sure you wish to logout?</p>
+                <form action="/logout" method="post">
 
-                  <!-- the start of Passoword div-->
-                  <div class="form-outline mb-4">
-                    <input type="password" id="pw" name="pw" class="form-control" autocomplete="off" required>
-                    <label class="form-label" for="pw">Password</label>
-                  </div>
                   <!-- the start of Password div-->
 
                   <!-- the start of forgot password div-->
                   <div class="text-center pt-1 mb-5 pb-1">
                     <!-- start of login button, create a block that only brings you to the dashboard page when given the right info-->
-                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Login</button>
-                    <!-- end of login button-->
-                    <a class="text-muted" href="#!">Forgot password?</a>
+                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Logout</button>
+                    <!-- end of login button-->       
                   </div>
-                  <!-- the end of forgot password div-->
-
-                  <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Don't have an account?</p>
-                    <!-- couldn't get the button to work so i but a a tag that links to the signin page and but the button in the a tag -->
-                    <!-- this link gave me some clues: -->
-                    <a href="/signup">
-                      <button type="button" action="signup_page.html" class="btn btn-dark btn-rounded">Create new</button>
-                    </a>
-                   
-                  </div>
-
                 </form>
-
               </div>
-
-  
               </div>
             </div>
           </div>
@@ -104,3 +77,4 @@
 
 
 {% endblock %}
+
