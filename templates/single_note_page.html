@@ -35,7 +35,8 @@
                     </tbody>
                 </table>
                 <div class="mb-3 col-xs-4">
-                  <button type="button" class="btn btn-success btn-sm" id = "btn" onclick="likeButton()">Like</button>
+                  <button type="button" class="btn btn-outline-success btn-sm" id = "btn" onclick="likeButton()">Like</button>
+                  <!-- <p type="text" name="counter" id="couner" class="font-weight-normal"></p> -->
                 </div>
                 <div class="mb-3 col-xs-4">
                   <label for="content" class="form-label">{{ note.title }}</label>
@@ -59,6 +60,7 @@
 </section>
 <script>
   let index = 0;
+  var counter = 0; 
   function likeButton() 
   {
     const btn = document.getElementById('btn');
@@ -66,11 +68,15 @@
     {
       btn.className = "btn btn-success btn-sm";
       index++;
+      counter++;
+      document.getElementById('counter').textContent = counter + 'Like';
     }
     else
     {
       btn.className = "btn btn-outline-success btn-sm";
       index--;
+      counter--;
+      document.getElementById('counter').textContent = counter + 'Like';
     }
   }
 </script>
