@@ -36,7 +36,7 @@
                 </table>
                 <div class="mb-3 col-xs-4">
                   <button type="button" class="btn btn-outline-success btn-sm" id = "btn" onclick="likeButton()">Like</button>
-                  <!-- <p type="text" name="counter" id="couner" class="font-weight-normal"></p> -->
+                  <label><a id="counter">   </a></label>
                 </div>
                 <div class="mb-3 col-xs-4">
                   <label for="content" class="form-label">{{ note.title }}</label>
@@ -69,14 +69,14 @@
       btn.className = "btn btn-success btn-sm";
       index++;
       counter++;
-      document.getElementById('counter').textContent = counter + 'Like';
+      document.getElementById('counter').textContent = '   ' + counter;
     }
     else
     {
       btn.className = "btn btn-outline-success btn-sm";
       index--;
       counter--;
-      document.getElementById('counter').textContent = counter + 'Like';
+      document.getElementById('counter').textContent = '   ' + counter;
     }
   }
 </script>
