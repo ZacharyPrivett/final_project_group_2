@@ -11,7 +11,7 @@ class NoteRepository:
         db.session.add(new_notes)
         db.session.commit()
         return new_notes
-
+    
     def get_note_by_id(self, note_id):
         #just in case
         #single_note = Note.query.get_or_404(note_id)

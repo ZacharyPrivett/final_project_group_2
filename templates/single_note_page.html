@@ -1,6 +1,6 @@
 {% extends '_layout.html' %}
 
-{% block title %}single note page {% endblock %}
+{% block title %} Edit Notes {% endblock %}
 
 {% block body %}
 
@@ -12,9 +12,10 @@
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-10">
               
+              
               <!-- start of single notes code -->
               <div>
-                <p class="mb-3">notes</p>
+                <p class="mb-3">Notes</p>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -41,6 +42,9 @@
                   </p>
                 </div>
               </div>
+              <a href="/notes/{{ note.note_id }}/edit">
+                <button type="submit" class="btn btn-primary mb-6">edit notes</button>
+              </a>
               <!-- end of single notes code-->
 
             </div>

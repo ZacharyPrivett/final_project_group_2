@@ -165,6 +165,36 @@ def view_all_notes():
     all_notes = note_repository_singleton.get_all_notes()
     return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes)
 
+#edit notes page 
+@app.get('/notes/<note_id>/edit')
+def edit_notes(note_id):
+    note_to_edit =  note_repository_singleton.get_note_by_id(note_id)
+    return render_template('edit_notes.html', note=note_to_edit)
+
+#update_notes
+@app.post('/notes/<note_id>/edit')
+def update_notes(note_id):
+    note_to_update = note_repository_singleton.get_note_by_id(note_id)
+    title = request.form.get('title', '')
+    course = request.form.get('course', '')
+    descript = request.form.get('descript', '')
+    content = request.form.get('content', '')
+    #will add some tessting later 
+    note_to_update.title = title
+    note_to_update.course = course
+    note_to_update.descript = descript
+    note_to_update.content = content
+    db.session.commit()
+    return render_template('edit_notes.html', note=note_to_update)
+
+#delete method
+@app.post('/notes/<note_id>/delete')
+def delete_note(note_id):
+    note_to_delete = note_repository_singleton.get_note_by_id(note_id)
+    db.session.delete(note_to_delete)
+    db.session.commit()
+    return redirect('/notes/list')
+
 
 # About
 @app.get('/about')
