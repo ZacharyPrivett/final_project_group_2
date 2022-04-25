@@ -18,6 +18,12 @@ class NoteRepository:
         single_note = Note.query.filter(Note.note_id == note_id).first()
         return single_note
 
+    def create_comments(self, content, time_stamp, thread_id): #,creator_id):
+        new_comment = Comments(content=content, time_stamp=time_stamp, thread_id=thread_id)
+        db.session.add(new_comment)
+        db.session.commit()
+        return new_comment
+
     def get_comments(self, note_id):
         return Comments.query.filter(Comments.thread_id == note_id).all()
 
