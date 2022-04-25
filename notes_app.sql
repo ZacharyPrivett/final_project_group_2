@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS note(
 CREATE TABLE IF NOT EXISTS comments(
     comment_id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
-    time_stamp TIME,
+    time_stamp TEXT,
     commenter_id INT NULL,
     thread_id INT NOT NULL,
     PRIMARY KEY(comment_id),
