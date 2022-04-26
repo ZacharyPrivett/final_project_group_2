@@ -18,7 +18,7 @@ class Note(db.Model):
     course = db.Column(db.String, nullable=False)
     descript = db.Column(db.String, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=False)
 
 class Comments(db.Model):
     __tablename__ = 'Comments'

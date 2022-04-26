@@ -24,7 +24,7 @@ bcrypt = Bcrypt(app)
 # Index
 @app.get('/')
 def index():
-    return render_template('index.html', user=session['user']['username'])
+    return render_template('index.html')
 
 # login
 @app.get('/login/page')
