@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS note(
     course VARCHAR(255) NOT NULL,
     descript VARCHAR(255) NULL,
     content TEXT NOT NULL,
-    creator_id INT NULL,
+    creator_id INT NOT NULL,
     PRIMARY KEY(note_id),
     FOREIGN KEY(creator_id) REFERENCES users(user_id)
     );
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS comments(
     comment_id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
     time_stamp TIME,
-    commenter_id INT NULL,
+    commenter_id INT NOT NULL,
     thread_id INT NOT NULL,
     PRIMARY KEY(comment_id),
     FOREIGN KEY(commenter_id) REFERENCES users(user_id),

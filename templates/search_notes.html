@@ -21,7 +21,7 @@
                   <option value="Course">Search by Course</option>
                   <option value="Author">Search by Author</option>          
                 </select>
-                <div class="input-group">
+                <div class="input-group mt-5">
                   <input type="text" name="q" id="q" class="form-control" autocomplete="off" required>
                   <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Search</button>
@@ -45,9 +45,9 @@
                   {% for note in notes %}
                     <tr>
                       <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
-                      <td>{{ note.description }}</td>
+                      <td>{{ note.descript }}</td>
                       <td>{{ note.notes }}</td>
-                      <td>{{ note.creator_id }}</td>
+                      <td>{{ note.author.username }}</td>
                       <td>{{ note.course }}</td>
                     </tr>
                   {% endfor %}
