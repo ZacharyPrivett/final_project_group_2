@@ -3,6 +3,80 @@
 {% block title %}Comments{% endblock %}
 
 {% block body %}
+<section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/19uOTUBLyvVkkxA5x3/giphy.gif?cid=ecf05e47ok8kcl9so4r3qztpnfsynwkl1v0aqvrut8jblxdf&rid=giphy.gif&ct=g');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-10 col-xl-10">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-10">
+                
+                
+                <!-- Note Overview -->
+                <div>
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col">Note Title</th>
+                              <th scope="col">Course Name</th>
+                              <th scope="col">Author</th>
+                              <th scope="col">Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                                <tr>
+                                    <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
+                                    <td>{{ note.course }}</td>
+                                    <td>{{ note.creator_id }}</td>
+                                    <td>{{ note.description }}</td>
+                                </tr>
+                      </tbody>
+                  </table>
+                </div>
+
+                <!-- Comment Form -->
+                <h4 class="mb-5">Comments</h4>
+                <form action="/notes/<note_id>/comments" method="get" class="mb-5">
+                  <div class="input-group">
+                    <input type="text" name="comment" id="comment" class="form-control" placeholder = "Add a comment" autocomplete="off" required>
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </form>
+                <!--View Comments-->
+                <table style="width: 100%" class="table">
+                  <colgroup>
+                    <col span="1" style="width: 60%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 20%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>Comment</th>
+                      <th>User</th>
+                      <th>Posted</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for comment in comments %}
+                      <tr>
+                        <td>{{ comment.content }}</td>
+                        <td> 1 </td> <!--Change to current session username -->
+                        <td>{{ comment.time_stamp }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <!-- search notes code ends here-->
 
 
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
 {% endblock %}

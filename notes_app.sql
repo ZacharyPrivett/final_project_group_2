@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS note(
 CREATE TABLE IF NOT EXISTS comments(
     comment_id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
-    time_stamp TIME,
-    commenter_id INT NOT NULL,
+    time_stamp TEXT NOT NULL,
+    commenter_id INT,
     thread_id INT NOT NULL,
     PRIMARY KEY(comment_id),
     FOREIGN KEY(commenter_id) REFERENCES users(user_id),
