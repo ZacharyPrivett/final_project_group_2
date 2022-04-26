@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS note(
     course VARCHAR(255) NOT NULL,
     descript VARCHAR(255) NULL,
     content TEXT NOT NULL,
-    creator_id INT NULL,
+    creator_id INT NOT NULL,
     PRIMARY KEY(note_id),
     FOREIGN KEY(creator_id) REFERENCES users(user_id)
     );

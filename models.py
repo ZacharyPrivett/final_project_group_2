@@ -8,6 +8,8 @@ class Users(db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     pw = db.Column(db.String, nullable=False)
+    # A user can have many notes
+    user_notes = db.relationship('Note', backref='author')
 
 class Note(db.Model):
     __tablename__ = 'Note'
@@ -16,7 +18,7 @@ class Note(db.Model):
     course = db.Column(db.String, nullable=False)
     descript = db.Column(db.String, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    #creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=True)
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
 class Comments(db.Model):
     __tablename__ = 'Comments'
