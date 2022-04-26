@@ -1,5 +1,10 @@
-{% extends '_layout.html' %} {% block title %}User Main Dashboard{% endblock %} {% block body %}
+{% extends '_layout.html' %} 
 
-<h1>You are logged in, {{ user }}!</h1>
+{% block title %}User Main Dashboard{% endblock %}
+
+{% block body %}
+
+<h1 class="mt-5">Welcome {{ user }} to your dashboard</h1>
+<h2>Here you will find your notes and recently searched notes</h2>
 
 {% endblock %}

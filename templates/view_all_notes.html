@@ -30,7 +30,7 @@
                                 <tr>
                                     <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
                                     <td>{{ note.course }}</td>
-                                    <td>{{ note.creator_id }}</td>
+                                    <td>{{ note.author.username }}</td>
                                     <td>{{ note.descript }}</td>
                                 </tr>
                             {% endfor %}
