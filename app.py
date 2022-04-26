@@ -1,3 +1,4 @@
+from datetime import datetime
 import re
 from tokenize import String
 from flask import Flask, flash, redirect, render_template, request, session, abort
@@ -157,6 +158,7 @@ def search_notes():
 
 @app.get('/single_note/<note_id>')
 def single_note(note_id):
+    print(note_id)
     single_note = note_repository_singleton.get_note_by_id(note_id)
     return render_template('single_note_page.html', note=single_note)
 
@@ -195,6 +197,18 @@ def delete_note(note_id):
     db.session.commit()
     return redirect('/notes/list')
 
+#view comments
+@app.route('/notes/<note_id>/comments', methods=['GET', 'POST'])
+def view_comments(note_id):
+    single_note = note_repository_singleton.get_note_by_id(note_id)
+    note_repository_singleton.get_comments(note_id)
+    return render_template('comments.html', note=single_note)
+def post_comment(note_id):
+    content = request.form.get('comment','')
+    time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
+    thread_id = note_id
+    note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, thread_id=thread_id)
+    return render_template('comments.html', value= note_id, search_query=content)
 
 # About
 @app.get('/about')
