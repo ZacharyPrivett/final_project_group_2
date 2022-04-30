@@ -35,8 +35,17 @@
                     </tbody>
                 </table>
                 <div class="mb-3 col-xs-4">
-                  <button type="button" class="btn btn-outline-success btn-sm" id = "btn" onclick="likeButton()">Like</button>
-                  <label><a id="counter">   </a></label>
+                  <form action="/single_note/{{ note.note_id }}" method="post"> 
+                    <button type="submit" 
+                    {% if liked == '0' %}
+                    class="btn btn-outline-success btn-sm" 
+                    {% else %}
+                    class="btn btn-success btn-sm" 
+                    {% endif %}id = "btn" onclick="likeButton()">Like</button>
+                    <label><a id="counter">{{note.likes}}</a></label>
+                    <input type="hidden" name="likes" value="{{note.likes}}" id="likes" />
+                    <input type="hidden" name="liked" value="0" id="liked" />
+                  </form>
                 </div>
                 <div class="mb-3 col-xs-4">
                   <label for="content" class="form-label">{{ note.title }}</label>
@@ -63,8 +72,9 @@
   </div>
 </section>
 <script>
-  let index = 0;
-  var counter = 0; 
+  let index = {{liked}}; 
+  let counter = {{note.likes}};
+  
   function likeButton() 
   {
     const btn = document.getElementById('btn');
@@ -73,14 +83,18 @@
       btn.className = "btn btn-success btn-sm";
       index++;
       counter++;
-      document.getElementById('counter').textContent = '   ' + counter;
+      document.getElementById('counter').textContent = counter;
+      document.getElementById('likes').value = counter
+      document.getElementById('liked').value = index
     }
     else
     {
       btn.className = "btn btn-outline-success btn-sm";
       index--;
       counter--;
-      document.getElementById('counter').textContent = '   ' + counter;
+      document.getElementById('counter').textContent = counter;
+      document.getElementById('likes').value = counter
+      document.getElementById('liked').value = index
     }
   }
 </script>
