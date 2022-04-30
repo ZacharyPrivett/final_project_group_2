@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS note(
     descript VARCHAR(255) NULL,
     content TEXT NOT NULL,
     creator_id INT NOT NULL,
+    likes INT NOT NULL,
     PRIMARY KEY(note_id),
     FOREIGN KEY(creator_id) REFERENCES users(user_id)
     );

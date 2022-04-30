@@ -155,11 +155,19 @@ def search_notes():
     
     return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q, user=session['user']['username'])
 
+#Single Notes
 @app.get('/single_note/<note_id>')
 def single_note(note_id):
-    print(note_id)
+    ##print(note_id)
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    return render_template('single_note_page.html', note=single_note, user=session['user']['username'])
+    return render_template('single_note_page.html', note=single_note, user=session['user']['username'], liked='0')
+@app.post('/single_note/<note_id>')
+def single_note_like(note_id):
+    single_note = note_repository_singleton.get_note_by_id(note_id)
+    index = request.form.get('liked')
+    single_note.likes = int(request.form.get('likes'))
+    db.session.commit()
+    return render_template('single_note_page.html', note=single_note, user=session['user']['username'],liked=index)
 
 @app.get('/notes/list')
 def view_all_notes():
