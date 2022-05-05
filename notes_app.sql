@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS comments(
     content TEXT NOT NULL,
     time_stamp TEXT NOT NULL,
     commenter_id INT,
+    username TEXT,
     thread_id INT NOT NULL,
     PRIMARY KEY(comment_id),
     FOREIGN KEY(commenter_id) REFERENCES users(user_id),

@@ -18,8 +18,8 @@ class NoteRepository:
         single_note = Note.query.filter(Note.note_id == note_id).first()
         return single_note
 
-    def create_comment(self, content, time_stamp, thread_id):
-        new_comment = Comments(content=content, time_stamp=time_stamp, thread_id=thread_id)
+    def create_comment(self, content, time_stamp, username, thread_id):
+        new_comment = Comments(content=content, time_stamp=time_stamp, commenter_id = 1, username = username, thread_id=thread_id)
         db.session.add(new_comment)
         db.session.commit()
         return new_comment

@@ -27,7 +27,8 @@ class Comments(db.Model):
     content = db.Column(db.String, nullable=False)
     time_stamp = db.Column(db.String, nullable=False)
     commenter_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=True)
-    thread_id = db.Column(db.String, db.ForeignKey('Note.note_id'), nullable=False)
+    username = db.Column(db.String, nullable = True)
+    thread_id = db.Column(db.Integer, db.ForeignKey('Note.note_id'), nullable=False)
 
 def __repr__(self):
     return f'Note({self.note_id}, {self.title}, {self.course}, {self.descript}, {self.content}, {self.creator_id})'
