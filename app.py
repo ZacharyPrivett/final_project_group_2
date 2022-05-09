@@ -14,7 +14,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("CLEARDB_DATABASE_URL")
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['SQLALCHEMY_ECHO'] = True
 app.secret_key = os.getenv('SECRET_KEY')
@@ -137,13 +138,7 @@ def create_note():
 # Dashborad
 @app.get('/dashboard')
 def dashboard():
-    if 'user' not in session:
-        return render_template('dashboard.html')
-    if 'user' in session:
-        author = session['user']['user_id']
-        user_notes = []
-        user_notes = note_repository_singleton.get_notes_by_author(author)
-        return render_template('dashboard.html', notes=user_notes, user=session['user']['username'])
+    return render_template('dashboard.html', user=session['user']['username'])
 
 
 # Search and view notes
@@ -218,19 +213,18 @@ def delete_note(note_id):
     db.session.commit()
     return redirect('/notes/list')
 
-#add and view comments
+#view comments
 @app.route('/notes/<note_id>/comments', methods=['GET', 'POST'])
 def view_comments(note_id):
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    comment = note_repository_singleton.get_comments(note_id)
-    if request.method == 'POST':
-        content = request.form.get('comment','')
-        time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
-        thread_id = note_id
-        username = session['user']['username']
-        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
-        comment = note_repository_singleton.get_comments(note_id)
-    return render_template('comments.html', note=single_note, comments = comment)
+    note_repository_singleton.get_comments(note_id)
+    return render_template('comments.html', note=single_note)
+def post_comment(note_id):
+    content = request.form.get('comment','')
+    time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
+    thread_id = note_id
+    note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, thread_id=thread_id)
+    return render_template('comments.html', value= note_id, search_query=content)
 
 # About
 @app.get('/about')
