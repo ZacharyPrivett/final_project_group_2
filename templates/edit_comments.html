@@ -1,0 +1,63 @@
+{% extends '_layout.html' %}
+
+{% block title %}edit comments{% endblock %}
+
+{% block body %}
+<section class="vh-100 bg-image" style="background-image: url('https://media3.giphy.com/media/5yYz7skyob4JmTQcHW/giphy.gif?cid=790b7611f29413fa0d575fdc2e06001ea235dc44c416c6b8&rid=giphy.gif&ct=g');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-10 col-xl-10">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-10">
+                
+                <!-- where the notes show -->
+                <!-- div where the code starts-->
+                <div> 
+                    <h1 class="mt-5">Edit Comment</h1>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Comment</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Posted</th>
+                        
+                            </tr>
+                        </thead>
+                        <tbody>
+                                  <tr>
+                                    <td>{{ comment.content }}</td>
+                                    <td>{{ comment.username }} </td>
+                                    <td>{{ comment.time_stamp }}</td>
+                                    <td>{{ comment.comment_id }}</td>
+                                  </tr>
+                        </tbody>
+                        
+                    </table>
+                    <form action="/comment/{{ comment.comment_id }}/edit" method="post">
+                        <div class="mb-3 col-xs-4"> 
+                            <label for="content" class="form-label">comments</label>
+                            <textarea type="text" name="content" id="content" class="form-control" rows="8" autocomplete="off" required value="{{ comment.content }}">{{ comment.content }}
+                            </textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-6">Finish</button>
+                    </form>
+                    
+                    <form action="/comment/{{ comment.comment_id }}/delete" method="post"> 
+                        <button type="submit" class="btn btn-danger">delete</button>
+                    </form>
+                
+                  </div>
+                <!-- div where the code Ends-->
+  
+              </div>
+  
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </section>
+{% endblock %}

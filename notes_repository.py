@@ -26,6 +26,11 @@ class NoteRepository:
 
     def get_comments(self, note_id):
         return Comments.query.filter(Comments.thread_id == note_id).all()
+    
+    def get_comment_by_id(self, comment_id):
+        #single_comment = Comments.query.filter(Comments.comment_id == comment_id)
+        single_comment = Comments.query.get_or_404(comment_id)
+        return single_comment
 
     def search_by_author(self, author):
         searched_author = Users.query.filter(Users.username.ilike(f'%{author}%')).first()
