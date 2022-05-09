@@ -136,7 +136,13 @@ def create_note():
 # Dashborad
 @app.get('/dashboard')
 def dashboard():
-    return render_template('dashboard.html', user=session['user']['username'])
+    if 'user' not in session:
+        return render_template('dashboard.html')
+    if 'user' in session:
+        author = session['user']['user_id']
+        user_notes = []
+        user_notes = note_repository_singleton.get_notes_by_author(author)
+        return render_template('dashboard.html', notes=user_notes, user=session['user']['username'])
 
 
 # Search and view notes

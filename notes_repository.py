@@ -28,14 +28,17 @@ class NoteRepository:
         return Comments.query.filter(Comments.thread_id == note_id).all()
 
     def search_by_author(self, author):
-        author_id = Users.query.filter(Users.username.ilike(f'%{author}%')).first()
-        return Note.query.filter(Note.creator_id == author_id).all()
+        searched_author = Users.query.filter(Users.username.ilike(f'%{author}%')).first()
+        return Note.query.filter(Note.creator_id == searched_author.user_id).all()
     
     def search_by_title(self, title):
         return Note.query.filter(Note.title.ilike(f'%{title}%')).all()
     
     def search_by_course(self, course):
         return Note.query.filter(Note.course.ilike(f'%{course}%')).all()
+
+    def get_notes_by_author(self, author):
+        return Note.query.filter(Note.creator_id == author).all()
 
 note_repository_singleton = NoteRepository()
 
@@ -48,8 +51,7 @@ class UserRepository:
         db.session.commit()
     
     def get_user(self, username):
-        my_user = Users.query.filter_by(username=username).first()
-        print(my_user)
+        my_user = Users.query.filter_by(username=username).first() 
         return my_user
         
 user_repository_singleton = UserRepository()
