@@ -1,7 +1,8 @@
 from datetime import datetime
 import re
+import json
 from tokenize import String
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort, jsonify
 from flask_bcrypt import Bcrypt
 from notes_repository import note_repository_singleton, user_repository_singleton 
 from models import db
@@ -13,7 +14,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("CLEARDB_DATABASE_URL")
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['SQLALCHEMY_ECHO'] = True
 app.secret_key = os.getenv('SECRET_KEY')
@@ -159,6 +161,7 @@ def search_notes():
     if 'user' in session:
         return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q, user=session['user']['username'])
     return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q)
+  
 #Single Notes
 @app.get('/single_note/<note_id>')
 def single_note(note_id):
@@ -177,6 +180,22 @@ def single_note_like(note_id):
     if 'user' in session:
         return render_template('single_note_page.html', note=single_note, user=session['user']['username'],liked=index)
     return render_template('single_note_page.html', note=single_note,liked=index)   
+
+#Liking a Post
+@app.get('/liked/<note_id>')
+def single_note_likes_get(note_id):
+    noteId = note_id.replace("<","").replace(">","")
+    single_note = note_repository_singleton.get_note_by_id(int(noteId))
+    return jsonify(single_note.to_dict())
+@app.post('/liked/<note_id>')
+def single_note_likes_post(note_id):
+    noteId = note_id.replace("<","").replace(">","")
+    single_note = note_repository_singleton.get_note_by_id(noteId)
+    data = json.dumps(request.get_json())
+    data = data.partition(":")[2].replace("}","").strip()
+    single_note.likes = int(data)
+    db.session.commit()
+    return jsonify(single_note.to_dict())
 
 @app.get('/notes/list')
 def view_all_notes():
@@ -220,19 +239,18 @@ def delete_note(note_id):
     db.session.commit()
     return redirect('/notes/list')
 
-#add and view comments
+#view comments
 @app.route('/notes/<note_id>/comments', methods=['GET', 'POST'])
 def view_comments(note_id):
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    comment = note_repository_singleton.get_comments(note_id)
-    if request.method == 'POST':
-        content = request.form.get('comment','')
-        time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
-        thread_id = note_id
-        username = session['user']['username']
-        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
-        comment = note_repository_singleton.get_comments(note_id)
-    return render_template('comments.html', note=single_note, comments = comment)
+    note_repository_singleton.get_comments(note_id)
+    return render_template('comments.html', note=single_note)
+def post_comment(note_id):
+    content = request.form.get('comment','')
+    time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
+    thread_id = note_id
+    note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, thread_id=thread_id)
+    return render_template('comments.html', value= note_id, search_query=content)
 
 # About
 @app.get('/about')
