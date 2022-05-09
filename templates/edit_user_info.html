@@ -1,0 +1,43 @@
+{% extends '_layout.html' %}
+
+{% block title %}Edit User Info{% endblock %}
+
+{% block body %}
+<section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/26mkhTKYBbyy8904g/giphy.gif?cid=790b7611af2cc6bd64265faa1f01c20c3ec48928f42f394b&rid=giphy.gif&ct=g');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+
+              <!-- search notes code-->
+              <div> 
+                <h1 class="mt-3">Edit User Information Here</h1>
+          
+                  <form action="/{{ session['user']['user_id'] }}/edit" method="post">
+                    <div class="mb-3 mt-5">
+                        <label for="username" class="form-lable">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" autocomplete="off" required value="{{ user_to_edit.username }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" id="email" class="form-control" autocomplete="off" required value="{{ user_to_edit.email }}">
+                    </div>      
+                      <button type="submit" class="btn btn-primary mb-3 mt-3">Update</button>     
+                  </form>
+                <form action="/{{ session['user']['user_id'] }}/delete" method="post">
+                    <button type="submit" class="btn btn-danger mb-6">Delete User</button>
+                </form>
+              </div>
+              <!-- search notes code ends here-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}
