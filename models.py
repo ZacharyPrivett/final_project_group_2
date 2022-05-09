@@ -10,6 +10,8 @@ class Users(db.Model):
     pw = db.Column(db.String, nullable=False)
     # A user can have many notes
     user_notes = db.relationship('Note', backref='author')
+    # Deletes users notes when account is deleted
+    delete = db.relationship('Note', cascade='all, delete-orphan')
 
 class Note(db.Model):
     __tablename__ = 'Note'

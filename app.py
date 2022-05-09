@@ -15,7 +15,7 @@ load_dotenv()
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("CLEARDB_DATABASE_URL")
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['SQLALCHEMY_ECHO'] = True
 app.secret_key = os.getenv('SECRET_KEY')
@@ -290,7 +290,7 @@ def about():
         return render_template('about.html', user=session['user']['username'])
     return render_template('about.html')
 
-# edit and delete user
+# edit user page
 @app.get('/edit/<user_id>/page')
 def edit_user_page(user_id):
     if 'user' not in session:
@@ -298,7 +298,8 @@ def edit_user_page(user_id):
     user_to_edit = user_repository_singleton.get_user_by_id(user_id)
     return render_template('edit_user_info.html', edit_login_active=True, user=session['user']['username'], user_to_edit=user_to_edit)
 
-@app.post('/<user_id>/edit')
+# edit username and email
+@app.post('/edit/user/<user_id>')
 def edit_user(user_id):
     if 'user' not in session:
         abort(401)
@@ -306,13 +307,53 @@ def edit_user(user_id):
     user_to_edit.username = request.form.get('username', '')
     user_to_edit.email = request.form.get('email', '')
     db.session.commit()
-
+    # deletes "old user" from session
     del session['user']
-
+    # creates session with newly updated useraneme
     session['user'] = {
     'username': user_to_edit.username,
     'user_id': user_id
     }
-
     return redirect('/dashboard')
-    
+
+# edit password page
+@app.get('/edit/<user_id>/password/page')
+def edit_password_page(user_id):
+    if 'user' not in session:
+        abort(401)
+    pw_to_edit = user_repository_singleton.get_user_by_id(user_id)
+    return render_template('edit_password.html', edit_login_active=True, user=session['user']['username'], pw_to_edit=pw_to_edit)
+
+#edit password
+@app.post('/edit/<user_id>/password')
+def edit_password(user_id):
+    if 'user' not in session:
+        abort(401)
+    pw_to_edit = user_repository_singleton.get_user_by_id(user_id)
+    pw1 = request.form.get('password', '')
+    pw2 = request.form.get('password_confirm' '')
+    if pw1 != pw2:
+        abort(400)
+    hashed_password = bcrypt.generate_password_hash(pw1).decode('utf-8')
+    pw_to_edit.pw = hashed_password
+    db.session.commit()
+    return redirect('/dashboard')
+
+# delete user page
+@app.get('/delete/user/<user_id>/page')
+def delete_user_page(user_id):
+    if 'user' not in session:
+        abort(401)
+    user_to_delete = user_repository_singleton.get_user_by_id(user_id)
+    return render_template('delete_user_page.html', user_id=user_to_delete)
+
+# delete user
+@app.post('/delete/user/<user_id>')
+def delete_user(user_id):
+    if 'user' not in session:
+        abort(401)
+    user_to_delete = user_repository_singleton.get_user_by_id(user_id)
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    del session['user']
+    return redirect('/')
