@@ -58,5 +58,7 @@ class UserRepository:
     def get_user(self, username):
         my_user = Users.query.filter_by(username=username).first() 
         return my_user
-        
+    def get_user_by_id(self, user_id):
+        user_id = Users.query.filter_by(user_id=user_id).first()
+        return user_id        
 user_repository_singleton = UserRepository()
