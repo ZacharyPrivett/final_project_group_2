@@ -1,7 +1,8 @@
 from datetime import datetime
 import re
+import json
 from tokenize import String
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort, jsonify
 from flask_bcrypt import Bcrypt
 from notes_repository import note_repository_singleton, user_repository_singleton 
 from models import db
@@ -167,14 +168,21 @@ def single_note(note_id):
     ##print(note_id)
     single_note = note_repository_singleton.get_note_by_id(note_id)
     return render_template('single_note_page.html', note=single_note, user=session['user']['username'], liked='0')
-@app.post('/single_note/<note_id>')
-def single_note_like(note_id):
-    single_note = note_repository_singleton.get_note_by_id(note_id)
-    index = request.form.get('liked')
-    single_note.likes = int(request.form.get('likes'))
+#Liking a Post
+@app.get('/liked/<note_id>')
+def single_note_likes_get(note_id):
+    noteId = note_id.replace("<","").replace(">","")
+    single_note = note_repository_singleton.get_note_by_id(int(noteId))
+    return jsonify(single_note.to_dict())
+@app.post('/liked/<note_id>')
+def single_note_likes_post(note_id):
+    noteId = note_id.replace("<","").replace(">","")
+    single_note = note_repository_singleton.get_note_by_id(noteId)
+    data = json.dumps(request.get_json())
+    data = data.partition(":")[2].replace("}","").strip()
+    single_note.likes = int(data)
     db.session.commit()
-    return render_template('single_note_page.html', note=single_note, user=session['user']['username'],liked=index)
-
+    return jsonify(single_note.to_dict())
 @app.get('/notes/list')
 def view_all_notes():
     all_notes = note_repository_singleton.get_all_notes()

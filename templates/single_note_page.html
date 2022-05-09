@@ -35,17 +35,9 @@
                     </tbody>
                 </table>
                 <div class="mb-3 col-xs-4">
-                  <form action="/single_note/{{ note.note_id }}" method="post"> 
-                    <button type="submit" 
-                    {% if liked == '0' %}
-                    class="btn btn-outline-success btn-sm" 
-                    {% else %}
-                    class="btn btn-success btn-sm" 
-                    {% endif %}id = "btn" onclick="likeButton()">Like</button>
-                    <label><a id="counter">{{note.likes}}</a></label>
-                    <input type="hidden" name="likes" value="{{note.likes}}" id="likes" />
-                    <input type="hidden" name="liked" value="0" id="liked" />
-                  </form>
+                  <button id="likeBtn" class="btn btn-outline-success btn-sm">Like</button>
+                  <label><a id="counter">{{note.likes}}</a></label>
+                  <!--Not Green: btn btn-outline-success btn-sm Green:btn btn-success btn-sm-->
                 </div>
                 <div class="mb-3 col-xs-4">
                   <label for="content" class="form-label">{{ note.title }}</label>
@@ -72,31 +64,41 @@
   </div>
 </section>
 <script>
-  let index = {{liked}}; 
+  const noteId= {{note.note_id}}
+  let index = 0; 
   let counter = {{note.likes}};
-  
-  function likeButton() 
+  const likeBtn = document.querySelector('#likeBtn')
+  likeBtn.addEventListener('click', async () =>
   {
-    const btn = document.getElementById('btn');
+    const postLikes = await fetch(`/liked/<${noteId}>`);
+    const post = (await postLikes.json());
     if(index == 0)
     {
-      btn.className = "btn btn-success btn-sm";
+      likeBtn.className = "btn btn-success btn-sm";
       index++;
-      counter++;
-      document.getElementById('counter').textContent = counter;
-      document.getElementById('likes').value = counter
-      document.getElementById('liked').value = index
+      let liked = await fetch(`/liked/<${noteId}>`, {method: "POST", headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify({likes: ++post.likes}) })
+      likedPost = await liked.json()
+      //const newPost = await fetch(`/liked/<${noteId}>`);
+      //const newLikes = (await newPost.json());
+      document.getElementById('counter').textContent = likedPost.likes;
     }
     else
     {
-      btn.className = "btn btn-outline-success btn-sm";
+      likeBtn.className = "btn btn-outline-success btn-sm";
       index--;
-      counter--;
-      document.getElementById('counter').textContent = counter;
-      document.getElementById('likes').value = counter
-      document.getElementById('liked').value = index
+      let liked = await fetch(`/liked/<${noteId}>`, {method: "POST", headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body:JSON.stringify({likes: --post.likes})})
+      likedPost = await liked.json()
+      //const newPost = await fetch(`/liked/<${noteId}>`);
+      //const newLikes = (await newPost.json());
+      document.getElementById('counter').textContent = likedPost.likes;
     }
-  }
+  })
 </script>
 
 {% endblock %}
