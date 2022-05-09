@@ -1,0 +1,56 @@
+{% extends '_layout.html' %}
+
+{% block title %} single Comment {% endblock %}
+
+{% block body %}
+
+<section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/19uOTUBLyvVkkxA5x3/giphy.gif?cid=ecf05e47ok8kcl9so4r3qztpnfsynwkl1v0aqvrut8jblxdf&rid=giphy.gif&ct=g');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-10 col-xl-10">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-10">
+              
+              
+              <!-- start of single notes code -->
+              <div>
+                <p class="mb-3">single comment page</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Comment</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Posted</th>
+                    
+                        </tr>
+                    </thead>
+                    <tbody>
+                              <tr>
+                                <td>{{ comment.content }}</td>
+                                <td>{{ comment.username }} </td>
+                                <td>{{ comment.time_stamp }}</td>
+                                <td>{{ comment.comment_id }}</td>
+                              </tr>
+                    </tbody>
+                    <a href="/comment/{{ comment.comment_id }}/edit">
+                        <button type="submit" class="btn btn-primary mb-6">edit comment</button>
+                      </a>
+                </table>
+                  <!--Not Green: btn btn-outline-success btn-sm Green:btn btn-success btn-sm-->
+                </div>
+                
+              </div>
+   
+
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

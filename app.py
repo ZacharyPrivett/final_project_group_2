@@ -163,12 +163,15 @@ def single_note(note_id):
     ##print(note_id)
     single_note = note_repository_singleton.get_note_by_id(note_id)
     return render_template('single_note_page.html', note=single_note, user=session['user']['username'], liked='0')
+
+
 #Liking a Post
 @app.get('/liked/<note_id>')
 def single_note_likes_get(note_id):
     noteId = note_id.replace("<","").replace(">","")
     single_note = note_repository_singleton.get_note_by_id(int(noteId))
     return jsonify(single_note.to_dict())
+
 @app.post('/liked/<note_id>')
 def single_note_likes_post(note_id):
     noteId = note_id.replace("<","").replace(">","")
@@ -178,6 +181,7 @@ def single_note_likes_post(note_id):
     single_note.likes = int(data)
     db.session.commit()
     return jsonify(single_note.to_dict())
+
 @app.get('/notes/list')
 def view_all_notes():
     all_notes = note_repository_singleton.get_all_notes()
@@ -197,13 +201,28 @@ def update_notes(note_id):
     course = request.form.get('course', '')
     descript = request.form.get('descript', '')
     content = request.form.get('content', '')
-    #will add some tessting later 
+    #will add some testing later 
     note_to_update.title = title
     note_to_update.course = course
     note_to_update.descript = descript
     note_to_update.content = content
     db.session.commit()
     return render_template('edit_notes.html', note=note_to_update, user=session['user']['username'])
+
+#update comments
+@app.post('/comment/<comment_id>/edit')
+def update_comments(comment_id):
+    comment_to_update = note_repository_singleton.get_comment_by_id(comment_id)
+    content = request.form.get('content', '')
+    comment_to_update.content = content
+    db.session.commit()
+    return render_template('edit_comments.html', comment=comment_to_update, user=session['user']['username'])
+
+@app.get('/comment/<comment_id>/edit')
+def edit_comments(comment_id):
+    comment_to_update = note_repository_singleton.get_comment_by_id(comment_id)
+    
+    return render_template('edit_comments.html', comment=comment_to_update, user=session['user']['username'])
 
 #delete method
 @app.post('/notes/<note_id>/delete')
@@ -213,18 +232,34 @@ def delete_note(note_id):
     db.session.commit()
     return redirect('/notes/list')
 
+#delete comments
+@app.post('/comment/<comment_id>/delete')
+def delete_comment(comment_id):
+    comment_to_delete = note_repository_singleton.get_comment_by_id(comment_id)
+    db.session.delete(comment_to_delete)
+    db.session.commit()
+    return redirect('/dashboard')
+
 #view comments
+#changed it back to the original 
 @app.route('/notes/<note_id>/comments', methods=['GET', 'POST'])
 def view_comments(note_id):
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    note_repository_singleton.get_comments(note_id)
-    return render_template('comments.html', note=single_note)
-def post_comment(note_id):
-    content = request.form.get('comment','')
-    time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
-    thread_id = note_id
-    note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, thread_id=thread_id)
-    return render_template('comments.html', value= note_id, search_query=content)
+    comment = note_repository_singleton.get_comments(note_id)
+    if request.method == 'POST':
+        content = request.form.get('comment','')
+        time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
+        thread_id = note_id
+        username = session['user']['username']
+        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
+        comment = note_repository_singleton.get_comments(note_id)
+    return render_template('comments.html', note=single_note, comments = comment)
+
+#get single Comment
+@app.get('/comment/<comment_id>')
+def get_single_comment(comment_id):
+    single_comment = note_repository_singleton.get_comment_by_id(comment_id)
+    return render_template('single_comment.html', comment=single_comment, user=session['user']['username'])
 
 # About
 @app.get('/about')
