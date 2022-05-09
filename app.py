@@ -26,8 +26,9 @@ bcrypt = Bcrypt(app)
 # Index
 @app.get('/')
 def index():
+    if 'user' in session:
+        return render_template('index.html', user=session['user']['username'])
     return render_template('index.html')
-
 # login
 @app.get('/login/page')
 def get_login_page():
@@ -71,7 +72,7 @@ def fail():
 def success():
     if not 'user' in session:
         abort(401)
-    return render_template('dashboard.html', user=session['user']['username'])
+    return redirect('/dashboard')
 
 
 #logout
@@ -89,7 +90,7 @@ def logout():
         abort(401)
 
     del session['user']
-
+    flash("You have been logged out")
     return redirect('/')
 
 
@@ -121,7 +122,6 @@ def signup():
 def create_note_form():
     if 'user' not in session:
         return redirect('/login/page')
-
     return render_template('add_notes.html', add_notes_active=True, user=session['user']['username'])
 
 @app.post('/notes')
@@ -138,8 +138,12 @@ def create_note():
 # Dashborad
 @app.get('/dashboard')
 def dashboard():
-    return render_template('dashboard.html', user=session['user']['username'])
-
+    if 'user' in session:
+        author = session['user']['user_id']
+        user_notes = []
+        user_notes = note_repository_singleton.get_notes_by_author(author)
+        return render_template('dashboard.html', notes=user_notes, user=session['user']['username'])
+    return redirect('/login/page')
 
 # Search and view notes
 @app.get('/search')
@@ -154,15 +158,29 @@ def search_notes():
             found_notes = note_repository_singleton.search_by_author(q)
         else:
             found_notes = note_repository_singleton.search_by_title(q)
-    
-    return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q, user=session['user']['username'])
-
+    if 'user' in session:
+        return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q, user=session['user']['username'])
+    return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q)
+  
 #Single Notes
 @app.get('/single_note/<note_id>')
 def single_note(note_id):
     ##print(note_id)
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    return render_template('single_note_page.html', note=single_note, user=session['user']['username'], liked='0')
+    if 'user' in session:
+        return render_template('single_note_page.html', note=single_note, user=session['user']['username'], liked='0')
+    return render_template('single_note_page.html', note=single_note, liked='0')
+    
+@app.post('/single_note/<note_id>')
+def single_note_like(note_id):
+    single_note = note_repository_singleton.get_note_by_id(note_id)
+    index = request.form.get('liked')
+    single_note.likes = int(request.form.get('likes'))
+    db.session.commit()
+    if 'user' in session:
+        return render_template('single_note_page.html', note=single_note, user=session['user']['username'],liked=index)
+    return render_template('single_note_page.html', note=single_note,liked=index)   
+
 #Liking a Post
 @app.get('/liked/<note_id>')
 def single_note_likes_get(note_id):
@@ -178,20 +196,26 @@ def single_note_likes_post(note_id):
     single_note.likes = int(data)
     db.session.commit()
     return jsonify(single_note.to_dict())
+
 @app.get('/notes/list')
 def view_all_notes():
     all_notes = note_repository_singleton.get_all_notes()
-    return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes, user=session['user']['username'])
-
+    if 'user' in session:
+        return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes, user=session['user']['username'])
+    return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes)
 #edit notes page 
 @app.get('/notes/<note_id>/edit')
 def edit_notes(note_id):
+    if 'user' not in session:
+        return redirect('/login/page')
     note_to_edit =  note_repository_singleton.get_note_by_id(note_id)
     return render_template('edit_notes.html', note=note_to_edit, user=session['user']['username'])
 
 #update_notes
 @app.post('/notes/<note_id>/edit')
 def update_notes(note_id):
+    if 'user' not in session:
+        abort(401)
     note_to_update = note_repository_singleton.get_note_by_id(note_id)
     title = request.form.get('title', '')
     course = request.form.get('course', '')
@@ -208,6 +232,8 @@ def update_notes(note_id):
 #delete method
 @app.post('/notes/<note_id>/delete')
 def delete_note(note_id):
+    if 'user' not in session:
+        abort(401)
     note_to_delete = note_repository_singleton.get_note_by_id(note_id)
     db.session.delete(note_to_delete)
     db.session.commit()
@@ -229,5 +255,33 @@ def post_comment(note_id):
 # About
 @app.get('/about')
 def about():
-    return render_template('about.html', user=session['user']['username'])
+    if 'user' in session:
+        return render_template('about.html', user=session['user']['username'])
+    return render_template('about.html')
 
+# edit and delete user
+@app.get('/edit/<user_id>/page')
+def edit_user_page(user_id):
+    if 'user' not in session:
+        abort(401)
+    user_to_edit = user_repository_singleton.get_user_by_id(user_id)
+    return render_template('edit_user_info.html', edit_login_active=True, user=session['user']['username'], user_to_edit=user_to_edit)
+
+@app.post('/<user_id>/edit')
+def edit_user(user_id):
+    if 'user' not in session:
+        abort(401)
+    user_to_edit = user_repository_singleton.get_user_by_id(user_id)    
+    user_to_edit.username = request.form.get('username', '')
+    user_to_edit.email = request.form.get('email', '')
+    db.session.commit()
+
+    del session['user']
+
+    session['user'] = {
+    'username': user_to_edit.username,
+    'user_id': user_id
+    }
+
+    return redirect('/dashboard')
+    
