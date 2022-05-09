@@ -3,8 +3,46 @@
 {% block title %}User Main Dashboard{% endblock %}
 
 {% block body %}
+              
+<section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/19uOTUBLyvVkkxA5x3/giphy.gif?cid=ecf05e47ok8kcl9so4r3qztpnfsynwkl1v0aqvrut8jblxdf&rid=giphy.gif&ct=g');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-10 col-xl-10">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-10">
+                <!-- Note Overview -->
+                <h1 class="mt-5 mb-5">Welcome {{ user }} to your dashboard</h1>
+                <h2 class="mb-5">Here you will find your notes</h2>
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Note Title</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for note in notes %}
+                                <tr>
+                                    <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
+                                    <td>{{ note.course }}</td>
+                                    <td>{{ note.author.username }}</td>
+                                    <td>{{ note.descript }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-<h1 class="mt-5">Welcome {{ user }} to your dashboard</h1>
-<h2>Here you will find your notes and recently searched notes</h2>
-
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
 {% endblock %}
