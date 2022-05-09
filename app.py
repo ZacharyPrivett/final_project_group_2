@@ -245,15 +245,14 @@ def delete_comment(comment_id):
 @app.route('/notes/<note_id>/comments', methods=['GET', 'POST'])
 def view_comments(note_id):
     single_note = note_repository_singleton.get_note_by_id(note_id)
-    comment = note_repository_singleton.get_comments(note_id)
-    if request.method == 'POST':
-        content = request.form.get('comment','')
-        time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
-        thread_id = note_id
-        username = session['user']['username']
-        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
-        comment = note_repository_singleton.get_comments(note_id)
-    return render_template('comments.html', note=single_note, comments = comment)
+    note_repository_singleton.get_comments(note_id)
+    return render_template('comments.html', note=single_note)
+def post_comment(note_id):
+    content = request.form.get('comment','')
+    time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
+    thread_id = note_id
+    note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, thread_id=thread_id)
+    return render_template('comments.html', value= note_id, search_query=content)
 
 #get single Comment
 @app.get('/comment/<comment_id>')
