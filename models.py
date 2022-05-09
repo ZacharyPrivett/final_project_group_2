@@ -21,6 +21,20 @@ class Note(db.Model):
     likes = db.Column(db.Integer, nullable=False, default = 0)
     creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=False)
 
+    def to_dict(self):
+        return {
+            "noteId": self.note_id,
+            "title":self.title,
+            "course": self.course,
+            "descript": self.descript,
+            "content": self.content,
+            "likes": self.likes,
+            "creatorId": self.creator_id,
+        }
+
+    def __repr__(self):
+        return f'Note({self.note_id}, {self.title}, {self.course}, {self.descript}, {self.content}, {self.creator_id})'
+        
 class Comments(db.Model):
     __tablename__ = 'Comments'
     comment_id = db.Column(db.Integer, primary_key=True)
@@ -29,5 +43,3 @@ class Comments(db.Model):
     commenter_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=True)
     thread_id = db.Column(db.String, db.ForeignKey('Note.note_id'), nullable=False)
 
-def __repr__(self):
-    return f'Note({self.note_id}, {self.title}, {self.course}, {self.descript}, {self.content}, {self.creator_id})'
