@@ -275,7 +275,7 @@ def view_comments(note_id):
         username = session['user']['username']
         note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
         comment = note_repository_singleton.get_comments(note_id)
-    return render_template('comments.html', note=single_note, comments = comment)
+    return render_template('comments.html', note=single_note, comments = comment, user=session['user']['username'])
 
 #get single Comment
 @app.get('/comment/<comment_id>')
