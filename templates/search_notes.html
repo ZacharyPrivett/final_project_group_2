@@ -3,6 +3,28 @@
 {% block title %}Search Notes{% endblock %}
 
 {% block body %}
+<style> 
+  .gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #68625e, rgba(240, 149, 128, 0.2), #dd3675, #b44593);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(25, 95, 161, 0.2), #9582a1, #2e3891, #7e5973);
+  }
+
+  .tiledBackground {
+      background-image: url(https://www.mozilla.org/media/img/logos/firefox/logo-quantum.9c5e96634f92.png);
+      background-size: 150px;
+      width: 300px;
+      height: 300px;
+      border: 2px solid;
+      color: pink;
+  }
+</style>
+
 <section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/26mkhTKYBbyy8904g/giphy.gif?cid=790b7611af2cc6bd64265faa1f01c20c3ec48928f42f394b&rid=giphy.gif&ct=g');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
@@ -24,7 +46,7 @@
                 <div class="input-group mt-5">
                   <input type="text" name="q" id="q" class="form-control" autocomplete="off" required>
                   <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary gradient-custom-2">Search</button>
                   </div>
                 </div>
               </form>
