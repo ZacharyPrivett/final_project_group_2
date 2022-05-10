@@ -3,6 +3,76 @@
 {% block title %}Add Notes{% endblock %}
 
 {% block body %}
+<style> 
+  .gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #ee7724, rgba(240, 149, 128, 0.2), #dd3675, #b44593);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(25, 95, 161, 0.2), #d8363a, #2e3891, #b44593);
+  }
+
+  .tiledBackground {
+      background-image: url(https://www.mozilla.org/media/img/logos/firefox/logo-quantum.9c5e96634f92.png);
+      background-size: 150px;
+      width: 300px;
+      height: 300px;
+      border: 2px solid;
+      color: pink;
+  }
+  
+
+  @media (min-width: 768px) {
+      .gradient-form {
+      height: 100vh !important;
+  }
+  
+  }
+  @media (min-width: 769px) {
+      .gradient-custom-2 {
+      border-top-right-radius: .3rem;
+      border-bottom-right-radius: .3rem;
+  }
+
+  
+  }
+
+  
+          .gradient-custom-3 {
+      /* fallback for old browsers */
+      background: #0e7486;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right, rgba(47, 107, 122, 0.5), rgba(74, 32, 189, 0.192));
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+      }
+      .gradient-custom-4 {
+      /* fallback for old browsers */
+      background: #84fab0;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+      }
+
+      .gradient-custom-5 {
+      /* fallback for old browsers */
+      background: #f5293a;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right, rgb(209, 26, 26), rgb(228, 20, 20));
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to right, rgb(250, 175, 132), rgb(216, 63, 42))
+      }
+</style>
 <section class="vh-100 bg-image" style="background-image: url('https://media3.giphy.com/media/5yYz7skyob4JmTQcHW/giphy.gif?cid=790b7611f29413fa0d575fdc2e06001ea235dc44c416c6b8&rid=giphy.gif&ct=g');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
       <div class="container h-100">
@@ -34,11 +104,11 @@
                             </textarea>
                         </div>
                             
-                            <button type="submit" class="btn btn-primary mb-6">Finish</button>
-                            
+                            <button type="submit" class="btn btn-success gradient-custom-4 text-body mb-3">Finish</button>
+                           
                     </form>
                     <form action="/notes/{{note.note_id}}/delete" method="post"> 
-                      <button type="submit" class="btn btn-danger">delete</button>
+                      <button type="submit" class="btn btn-success gradient-custom-5 text-body mb-3">Delete</button>
                     </form>
                     
                 
