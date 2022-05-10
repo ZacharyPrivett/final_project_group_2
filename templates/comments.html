@@ -104,9 +104,12 @@
                               <td><a href="/comment/{{ comment.comment_id }}">{{ comment.comment_id }}</a></td>
                          -->
                          
-                         {% if user == comment.username %}
-                          <td><a href="/comment/{{ comment.comment_id }}/edit">edit></td>
+                          {% if user == comment.username %}
+                            <td><a href="/comment/{{ comment.comment_id }}/edit">edit </td>
+                          {% else %}
+                            <td>     </td>
                           {% endif %}
+
                         </tr>
                       {% endfor %}
                     </tbody>
