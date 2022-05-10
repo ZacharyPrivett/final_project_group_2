@@ -19,7 +19,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("CLEARDB_DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['SQLALCHEMY_ECHO'] = True
 app.secret_key = os.getenv('SECRET_KEY')
-
 db.init_app(app)
 bcrypt = Bcrypt(app)
 
