@@ -3,6 +3,28 @@
 {% block title %}Add Notes{% endblock %}
 
 {% block body %}
+<style>
+  .gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #46508a, rgba(240, 149, 128, 0.2), #dd3675, #b44593);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(25, 95, 161, 0.2), #824f99, #505583, #7e5973);
+  }
+
+  .tiledBackground {
+      background-image: url(https://www.mozilla.org/media/img/logos/firefox/logo-quantum.9c5e96634f92.png);
+      background-size: 150px;
+      width: 300px;
+      height: 300px;
+      border: 2px solid;
+      color: pink;
+  }
+</style>
+
 <section class="vh-100 bg-image" style="background-image: url('https://media3.giphy.com/media/5yYz7skyob4JmTQcHW/giphy.gif?cid=790b7611f29413fa0d575fdc2e06001ea235dc44c416c6b8&rid=giphy.gif&ct=g');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
       <div class="container h-100">
@@ -33,7 +55,7 @@
                             <textarea type="text" name="content" id="content" class="form-control" rows="8" autocomplete="off" required></textarea>
                         </div>
                         
-                            <button type="submit" class="btn btn-primary mb-6">Add Notes</button>
+                            <button type="submit" class="btn btn-primary gradient-custom-2 mb-6">Add Notes</button>
                     
                     </form>
                     
