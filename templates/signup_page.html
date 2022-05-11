@@ -4,6 +4,42 @@
 
 {% block body %}
 <style>
+    .scrollbar {
+margin-left: 50px;
+float: left;
+height: 700px;
+width: 500px;
+background: #fff;
+overflow-y: scroll;
+margin-bottom: 25px;
+}
+.force-overflow {
+min-height: 450px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #4285F4; }
+
+.scrollbar-secondary::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #F5F5F5;
+border-radius: 10px; }
+
+.scrollbar-secondary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-secondary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #aa66cc; }
+
     .gradient-custom-3 {
   /* fallback for old browsers */
   background: #84fab0;
@@ -33,8 +69,10 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
-              <div class=" card-body p-5">
-                <h2 class=" text-uppercase text-center mb-5">Create an account</h2>
+              <div class="scrollbar scrollbar-primary">
+                <div class=" card-body p-5">
+              
+                  <h2 class=" text-uppercase text-center mb-5">Create an account</h2>
   
                 <form action="/signup" method="post">  
                 <!-- start Username div-->
@@ -66,12 +104,7 @@
                   </div>
                 <!-- End Repeat Password div-->
 
-                <!-- start Repeat Password div-->
-                <div class="form-outline mb-4">
-                  <input type="profile_pic" id="profile_pic" name="profile_pic" class="form-control form-control-lg" autocomplete="off" required/>
-                  <label class="form-label" for="profile_pic">enter profile_pic</label>
-                </div>
-              <!-- End Repeat Password div-->
+               
   
                   <div class="form-check d-flex justify-content-center mb-5">
                     <input
@@ -91,7 +124,11 @@
   
                   <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login/page" class="fw-bold text-body"><u>Login here</u></a></p>
                 </form>
+                
+                
               </div>
+              </div>
+              
             </div>
           </div>
         </div>

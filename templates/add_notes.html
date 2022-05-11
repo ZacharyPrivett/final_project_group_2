@@ -4,6 +4,42 @@
 
 {% block body %}
 <style>
+    .scrollbar {
+margin-left: 30px;
+float: left;
+height: 700px;
+width: 940px;
+background: #fff;
+overflow-y: scroll;
+margin-bottom: 25px;
+}
+.force-overflow {
+min-height: 450px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #4285F4; }
+
+.scrollbar-secondary::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #F5F5F5;
+border-radius: 10px; }
+
+.scrollbar-secondary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-secondary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #aa66cc; }
+
   .gradient-custom-2 {
   /* fallback for old browsers */
   background: #fccb90;
@@ -32,36 +68,40 @@
           <div class="col-12 col-md-9 col-lg-10 col-xl-10">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-10">
-                
-                <!-- div where the code starts-->
+                <div class="scrollbar scrollbar-secondary">
+                  <!-- div where the code starts-->
                 <div> 
-                    <h1 class="mt-5">Add notes</h1>
-                    <p></p>
-                    <form action="/notes" method="post">
-                        <div class="mb-3 mt-5">
-                            <label for="title" class="form-lable">Post Title</label>
-                            <input type="text" name="title" id="title" class="form-control" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="course" class="form-label">Course Name</label>
-                            <input type="text" name="course" id="course" class="form-control" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="descript" class="form-label">Description</label>
-                            <input type="text" name="descript" id="descript" class="form-control" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3 col-xs-4">
-                            <label for="content" class="form-label">Notes</label>
-                            <textarea type="text" name="content" id="content" class="form-control" rows="8" autocomplete="off" required></textarea>
-                        </div>
+                  <h1 class="mt-5">Add notes</h1>
+                  <p></p>
+                  <form action="/notes" method="post">
+                      <div class="mb-3 mt-5">
+                          <label for="title" class="form-lable">Post Title</label>
+                          <input type="text" name="title" id="title" class="form-control" autocomplete="off" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="course" class="form-label">Course Name</label>
+                          <input type="text" name="course" id="course" class="form-control" autocomplete="off" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="descript" class="form-label">Description</label>
+                          <input type="text" name="descript" id="descript" class="form-control" autocomplete="off" required>
+                      </div>
+                      <div class="mb-3 col-xs-4">
                         
-                            <button type="submit" class="btn btn-primary gradient-custom-2 mb-6">Add Notes</button>
-                    
-                    </form>
-                    
+                          <label for="content" class="form-label">Notes</label>
+                          <textarea type="text" name="content" id="content" class="form-control" rows="8" autocomplete="off" required></textarea>
+                      </div>
+                      
+                          <button type="submit" class="btn btn-primary gradient-custom-2 mb-6">Add Notes</button>
+                  
+                  </form>
+                  
+              
+                </div>
+              <!-- div where the code Ends-->
+
+                </div>
                 
-                  </div>
-                <!-- div where the code Ends-->
                 
   
               </div>
