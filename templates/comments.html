@@ -97,14 +97,18 @@
                           <td>{{ comment.content }}</td>
                           <td>{{ comment.username }} </td>
                           <td>{{ comment.time_stamp }}</td>
+                          
+                          
                          <!-- <td>{{ comment.comment_id }}</td>
                               <td><a href="/comment/{{ comment.comment_id }}">{{ comment.comment_id }}</a></td>
                          -->
-                          
-                          <td><a href="/comment/{{ comment.comment_id }}/edit">edit></td>
-                          <td>
-                          
-                          </td>
+                         
+                          {% if user == comment.username %}
+                            <td><a href="/comment/{{ comment.comment_id }}/edit">edit </td>
+                          {% else %}
+                            <td>     </td>
+                          {% endif %}
+
                         </tr>
                       {% endfor %}
                     </tbody>

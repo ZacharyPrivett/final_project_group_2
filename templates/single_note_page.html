@@ -25,13 +25,20 @@
   }
 </style>
 
+
 <section class="vh-100 bg-image" style="background-image: url('https://media1.giphy.com/media/SHzl9Rp6UjlJm9GbSg/giphy.gif?cid=ecf05e47aebcbyo25kk6j2ih7t7xnm5t3cko7h4vdfxs16mc&rid=giphy.gif&ct=g');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
+        <ul class=" mb-5"></ul>
         <div class="col-12 col-md-9 col-lg-10 col-xl-10 ">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-10 ">
+          
+          <div class="card" style="border-radius: 30px;">
+            <div id="" style="overflow-y:scroll;  height:1100px;"> 
+            
+            
+            
+            <div class="card-body p-5 ">
               
               
               <!-- start of single notes code -->
@@ -65,7 +72,9 @@
                   <label for="content" class="form-label ">{{ note.title }}</label>
                   <p type="text" name="content" id="content" class="form-control " rows="8" autocomplete="off" required>
                     {{ note.content }}
+                    
                   </p>
+                  
                 </div>
               </div>
               {% if user == note.author.username %}
@@ -78,6 +87,8 @@
               </a>
               {% endif %}
               <!-- end of single notes code-->
+
+              <div class="scroll-bar">
               <!-- go to comments-->
               <a href="/notes/{{ note.note_id }}/comments">
                
@@ -87,7 +98,92 @@
                   <!-- end of login button-->       
                 </div>
               </a>
+              
+              <tr>
+                
+                
+                
+                <section class="gradient-custom">
+                  <div class="container  py-5">
+                    <div class="row d-flex justify-content-center">
+                      <div class="col-md-12 col-lg-10 col-xl-8">
+                        <div id="" style="overflow-y:scroll;  height:350px;"> 
+                        <div class="card">
+                          <div class="card-body p-4">
+                            <h4 class="text-center mb-4 pb-2">Comment Section </h4>
+                            {% for comment in comments %}
+                            <div class="row mb-3">
+                              <div class="col">
+                                <div class="d-flex flex-start">
+                                  <!-- code for the profile_pics of other users-->
+                                  {% for all_users in users %}
+                                    {% if all_users.username == comment.username %}
+  
+                                  <img class="rounded-circle shadow-1-strong me-4"
+                                    src="{{all_users.profile_pic}}" alt="avatar" width="65"
+                                    height="65" />
+                                   
+                                    {% endif %}
+                                    {% endfor %}
+                                  <div class="flex-grow-1 flex-shrink-1">
+                                    <div>
+                                      <div class="d-flex justify-content-between align-items-center">
+                                        <p class="mb-1">
+                                          
+                              
+                                          {{ comment.username }} <span class="small">- {{ comment.time_stamp }}</span>
+                                        </p>
+                                        {% if user == comment.username %}
+                                            <td><a href="/comment/{{ comment.comment_id }}/edit">edit 
+                                              
+                                            </td>
+                                          {% else %}
+                                            <td>     </td>
+                                          {% endif %}
 
+                                        </tr>
+                                      
+                                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
+                                      </div>
+                                      <p class="small mb-0">
+                                        {{ comment.content }}
+                                      </p>
+                                    </div>
+                
+                                  
+                                  </div>
+
+                                  
+                                </div>
+                                  </div>
+                                </div>
+                                {% endfor %}
+                                <!-- Comment Form -->
+                                <h4 class="mb-2"> add comment </h4>
+                                <form action="/single_note/{{ note.note_id }}" method="post" class="mb-5">
+                                  <div class="input-group">
+                                    <input type="text" name="comment" id="comment" class="form-control" placeholder = "Add a comment" autocomplete="off" required>
+                                    <div class="input-group-append">
+                                      <button type="submit" class="btn btn-primary gradient-custom-2">Submit</button>
+                                    </div>
+                                    
+                                    <ul class=" mb-15"></ul>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>          
+                        
+              
+
+              <!-- this is where you can see comments -->
+              
+                          
             </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users(
     user_id INT AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
+    profile_pic VARCHAR(255),
     pw VARCHAR(255) NOT NULL,
     PRIMARY KEY(user_id)
     );

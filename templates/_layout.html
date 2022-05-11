@@ -32,6 +32,46 @@
 </head>
 
 <!-- <body class="bg-dark" > -->
+<style>
+  div.ex1 {
+  overflow: scroll;
+}
+
+div.ex2 {
+  overflow: hidden;
+}
+
+div.ex3 {
+  overflow: auto;
+  max-height: 100vh;
+}
+
+div.ex4 {
+  overflow: clip;
+}
+
+div.ex5 {
+  overflow: visible;
+}
+
+body {
+  margin:0;
+  padding:0;  
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:100vh;
+}
+
+main {
+  flex:1 0 auto;
+}
+
+.footer {
+  background:rgb(0, 0, 0);
+}
+
+</style>
 <body class="bg-dark" >
 
 
@@ -68,7 +108,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/notes/list">View All Notes</a>
+              <a class="nav-link" href="/notes/list">View Popular Notes</a>
             </li>
             
             <li class="nav-item">
@@ -110,6 +150,8 @@
               {% if 'user' in session %}
                 <li class="nav-item">
                 <a class="nav-link" href="/dashboard"> {{ user }} </a>
+               
+               
               {% endif%}  
       <li class="nav-item dropdown">
         <a
@@ -121,7 +163,7 @@
           aria-expanded="false"
         >
           <img
-            src="https://media3.giphy.com/media/2yyGJIBKWtRuzQDyRi/giphy.gif?cid=790b7611a778ee4f90f72d22abcf1748eb09bf171532ce00&rid=giphy.gif&ct=g"
+            src="{{profile.profile_pic}}"
             class="rounded-circle"
             height="22"
             alt="    "
@@ -158,7 +200,7 @@
   </header>
   {% else%}
   <!-- navbar for the signed out user-->
-  <header class="bg-light text-center text-whit"> 
+  <header class="bg-light text-center text-whit" > 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <button
@@ -257,67 +299,75 @@
   </header>
 
   {% endif%}  
-       
-    <div class="container pt-4">
+
+  
+      
+    
+    <div class="container p-4">
+    
         <!-- Navbar -->
       
     <!-- Navbar -->
 
     
       
-        {% block body %} {% endblock %}
+        {% block body %} 
         
-    </div>
-    <footer class="bg-dark text-center text-white">
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-            <!-- Section: Form -->
-            <section class="">
-              <form action="">
-                <!--Grid row-->
-                <div class="row d-flex justify-content-center">
-                  <!--Grid column-->
-                  <div class="col-auto">
-                    <p class="pt-2">
-                      <strong>Sign up for our newsletter</strong>
-                    </p>
-                  </div>
-                  <!--Grid column-->
-        
-                  <!--Grid column-->
-                  <div class="col-md-5 col-12">
-                    <!-- Email input -->
-                    <div class="form-outline form-white mb-4">
-                      <input type="email" id="form5Example29" class="form-control" />
-                      <label class="form-label" for="form5Example29">Email address</label>
-                    </div>
-                  </div>
-                  <!--Grid column-->
-        
-                  <!--Grid column-->
-                  <div class="col-auto">
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-outline-light mb-4">
-                      Subscribe
-                    </button>
-                  </div>
-                  <!--Grid column-->
-                </div>
-                <!--Grid row-->
-              </form>
-            </section>
-            <!-- Section: Form -->
-          </div>
-          <!-- Grid container -->
-        
-          <!-- Copyright -->
-          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2020 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-          </div>
-          <!-- Copyright -->
-        </footer>
+        {% endblock %}
+      </div>  
     
+
+   
+      
     
 </body>
+
+<footer class="footer">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+  
+        <!-- Google -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-google"></i
+        ></a>
+  
+        <!-- Instagram -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+  
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+
 </html>
