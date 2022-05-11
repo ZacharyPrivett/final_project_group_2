@@ -24,6 +24,8 @@ class Note(db.Model):
     content = db.Column(db.Text, nullable=False)
     likes = db.Column(db.Integer, nullable=False, default = 0)
     creator_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=False)
+    # Deletes comments when related note is delelted
+    delete = db.relationship('Comments', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {
