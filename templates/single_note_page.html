@@ -143,7 +143,14 @@
           <div class="card" style="border-radius: 30px;">
 
             <div class="card-body p-5 ">
-              <div class="scrollbar scrollbar-secondary">
+              <style>
+                .scroll-bar {
+                  overflow:scroll;
+                  height:700px;
+                }
+              </style>
+
+              <div class="scroll-bar scrollbar-secondary">
                 <div>
                   <p class="mb-3 ">Notes: {{ note.title }}</p>
                   <table class="table table-striped ">
@@ -190,7 +197,7 @@
                 {% endif %}
                 <!-- end of single notes code-->
   
-                <div class="scroll-bar">
+                
                 <!-- go to comments-->
                 <a href="/notes/{{ note.note_id }}/comments">
                  
