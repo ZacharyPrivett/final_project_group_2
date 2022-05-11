@@ -115,7 +115,7 @@ def signup():
     email = request.form.get('email', '')
     password = request.form.get('pw', '')
     repeat_pw = request.form.get('pw2', '' )
-    profile_pic = request.form.get('profile_pic', '' )
+    profile_pic = request.form.get('profile_pic', 'https://media2.giphy.com/media/l1fDKnffMrl6TUQRVS/giphy.gif' )
 
     if password != repeat_pw or username == '' or password == '' or repeat_pw == '':
         abort(400)
@@ -234,10 +234,11 @@ def single_note_likes_post(note_id):
 @app.get('/notes/list')
 def view_all_notes():
     all_notes = note_repository_singleton.get_all_notes()
+    users = user_repository_singleton.get_all_user()
     if 'user' in session:
         creator_id = session['user']['user_id']
         profile = user_repository_singleton.get_user_by_id(creator_id)
-        return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes, profile=profile, user=session['user']['username'])
+        return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes, users=users, profile=profile, user=session['user']['username'])
     return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes)
 
 #edit notes page 
@@ -318,6 +319,7 @@ def view_comments(note_id):
     profile = user_repository_singleton.get_user_by_id(creator_id)
     single_note = note_repository_singleton.get_note_by_id(note_id)
     comment = note_repository_singleton.get_comments(note_id)
+    users = user_repository_singleton.get_all_user()
     if request.method == 'POST':
         content = request.form.get('comment','')
         time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
@@ -326,7 +328,7 @@ def view_comments(note_id):
         commenter_id = session['user']['user_id']
         note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id, commenter_id=commenter_id)
         comment = note_repository_singleton.get_comments(note_id)
-    return render_template('comments.html', note=single_note, comments = comment, profile = profile, user=session['user']['username'])
+    return render_template('comments.html', note=single_note, comments = comment, profile = profile, users=users, user=session['user']['username'])
 
 #get single Comment
 @app.get('/comment/<comment_id>')
@@ -360,8 +362,11 @@ def edit_user_page(user_id):
 # edit username and email
 @app.post('/edit/user/<user_id>')
 def edit_user(user_id):
+
     if 'user' not in session:
         abort(401)
+    creator_id = session['user']['user_id']
+    profile = user_repository_singleton.get_user_by_id(creator_id)
     user_to_edit = user_repository_singleton.get_user_by_id(user_id)    
     user_to_edit.username = request.form.get('username', '')
     user_to_edit.email = request.form.get('email', '')
@@ -374,7 +379,7 @@ def edit_user(user_id):
     'username': user_to_edit.username,
     'user_id': user_id
     }
-    return redirect('/dashboard')
+    return render_template('edit_user_info.html', edit_login_active=True, profile=profile, user=session['user']['username'], user_to_edit=user_to_edit)
 
 # edit password page
 @app.get('/edit/<user_id>/password/page')
