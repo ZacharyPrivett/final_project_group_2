@@ -70,7 +70,15 @@ background-color: rgba(25, 95, 161, 0.2); }
           <div class="col-12 col-md-9 col-lg-10 col-xl-10">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-10">
-                <div class="scrollbar scrollbar-secondary">
+                <!--View Comments-->
+                <style>
+                  .scroll-bar {
+                    overflow:scroll;
+                    height:700px;
+                  }
+                </style>
+
+                <div class="scroll-bar scrollbar-secondary">
                   <!-- Note Overview -->
                 <div>
                   <h4 class="text-center mb-4 pb-2">Comment Section For {{ note.title }} Notes</h4>
