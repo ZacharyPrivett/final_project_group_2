@@ -3,7 +3,43 @@
 {% block title %} About Page {% endblock %}
 
 {% block body %}
+<style>
+  .scrollbar {
+margin-left: 30px;
+float: left;
+height: 625px;
+width: 470px;
+background: #fff;
+overflow-y: scroll;
+margin-bottom: 25px;
+}
+.force-overflow {
+min-height: 450px;
+}
 
+.scrollbar-primary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #4285F4; }
+
+.scrollbar-secondary::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #F5F5F5;
+border-radius: 10px; }
+
+.scrollbar-secondary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-secondary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #aa66cc; }
+</style>
 
 <!-- styles -->
 <section class="vh-100 bg-image" style="background-image: url('https://media0.giphy.com/media/xUOxf3XKkQvwFV2pfq/giphy.gif?cid=790b7611b4b0d6f35791e1183b8f7cd41d9aba5b1cc3289b&rid=giphy.gif&ct=g');">
@@ -13,9 +49,10 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center ">About Us</h2>
+              <div class="scrollbar scrollbar-primary">
+                <h2 class="text-uppercase text-center ">About Us</h2>
 
-              <!-- Exaple 1 -->
+              <!-- Example 1 -->
                 <div class="card example-1 scrollbar-ripe-malinka">
                   <div class="card-body">
                     <h4 id="section1"><strong>better notes better grades lol</strong></h4>
@@ -31,7 +68,10 @@
                       Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
                   </div>
                 </div>
-                <!-- Exaple 1 -->
+                <!-- Example 1 -->
+              </div>
+
+              
               
             </div>
           </div>

@@ -3,6 +3,43 @@
 {% block title %}View All Notes{% endblock %}
 
 {% block body %}
+<style>
+  .scrollbar {
+margin-left: 30px;
+float: left;
+height: 700px;
+width: 940px;
+background: #fff;
+overflow-y: scroll;
+margin-bottom: 25px;
+}
+.force-overflow {
+min-height: 450px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #4285F4; }
+
+.scrollbar-secondary::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #F5F5F5;
+border-radius: 10px; }
+
+.scrollbar-secondary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-secondary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #aa66cc; }
+</style>
 
 <section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/l3q2Et4jH2l7YC5Nu/giphy.gif?cid=790b76119facb0a2013292b0c2c5a0c7e71c91a5559c7459&rid=giphy.gif&ct=g');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -11,33 +48,35 @@
           <div class="col-12 col-md-9 col-lg-10 col-xl-10">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-10">
-                
-                <!-- div where the code starts-->
+                <div class="scrollbar scrollbar-secondary">
+                   <!-- div where the code starts-->
                 <div>
-                    <h1 class="mb-5">All Notes</h1>
-                    <p class="mb-3">Your list of notes below</p>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Note Title</th>
-                                <th scope="col">Course Name</th>
-                                <th scope="col">Author</th>
-                                <th scope="col">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for note in notes %}
-                                <tr>
-                                    <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
-                                    <td>{{ note.course }}</td>
-                                    <td>{{ note.author.username }}</td>
-                                    <td>{{ note.descript }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <!-- div where the code Ends-->
+                  <h1 class="mb-5">All Notes</h1>
+                  <p class="mb-3">Your list of notes below</p>
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col">Note Title</th>
+                              <th scope="col">Course Name</th>
+                              <th scope="col">Author</th>
+                              <th scope="col">Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for note in notes %}
+                              <tr>
+                                  <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
+                                  <td>{{ note.course }}</td>
+                                  <td>{{ note.author.username }}</td>
+                                  <td>{{ note.descript }}</td>
+                              </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+              <!-- div where the code Ends-->
+                
+               
                 
   
               </div>
