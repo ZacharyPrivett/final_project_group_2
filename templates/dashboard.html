@@ -36,6 +36,7 @@
               <div class="card-body p-10">
                 <!-- Note Overview -->
                 <h1 class="mt-5 mb-5">Welcome {{ user }} to your dashboard</h1>
+                
                 <h2 class="mb-5">Here you will find your notes</h2>
                 <div>
                     <table class="table table-striped">
@@ -57,6 +58,9 @@
                                 </tr>
                             {% endfor %}
                         </tbody>
+                        <p>
+                          {{ user.profile_pic }}
+                        </p>
                     </table>
                 </div>
                     <form action="/edit/{{ session['user']['user_id'] }}/page">

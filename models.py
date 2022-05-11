@@ -1,3 +1,4 @@
+import profile
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -7,6 +8,7 @@ class Users(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
+    profile_pic = db.Column(db.Text, nullable=False)
     pw = db.Column(db.String, nullable=False)
     # A user can have many notes
     user_notes = db.relationship('Note', backref='author')
