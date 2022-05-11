@@ -192,7 +192,8 @@ def single_note(note_id):
         time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
         thread_id = note_id
         username = session['user']['username']
-        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
+        commenter_id = session['user']['user_id']
+        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id, commenter_id=commenter_id)
         comment = note_repository_singleton.get_comments(note_id)
     if 'user' in session:
         creator_id = session['user']['user_id']
