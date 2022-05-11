@@ -4,6 +4,18 @@
 
 {% block body %}
 <style>
+
+.padding {
+
+margin-left: -10px;
+float: left;
+height: 770px;
+width: 550px;
+background: #fff;
+
+margin-bottom: 25px;
+}
+
   .scrollbar {
 margin-left: 30px;
 float: left;
@@ -51,24 +63,40 @@ background-color: #aa66cc; }
                 <div class="scrollbar scrollbar-secondary">
                    <!-- div where the code starts-->
                 <div>
-                  <h1 class="mb-5">All Notes</h1>
+                  <h1 class="mb-5">Peer Notes</h1>
                   <p class="mb-3">Your list of notes below</p>
                   <table class="table table-striped">
                       <thead>
                           <tr>
-                              <th scope="col">Note Title</th>
-                              <th scope="col">Course Name</th>
-                              <th scope="col">Author</th>
-                              <th scope="col">Description</th>
+                            <th scope="col">Profile Pic</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Note Title</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Description</th>
                           </tr>
                       </thead>
                       <tbody>
                           {% for note in notes %}
                               <tr>
+                              
+                                <td>
+                                  {% for all_users in users %}
+                                  
+                                      {% if all_users.username == note.author.username  %}
+                                      
+                                      <img class="rounded-circle shadow-1-strong me-4"
+                                        src="{{all_users.profile_pic}}" alt="avatar" width="65"
+                                        height="65" />
+                                     
+                                      {% endif %}
+                                      {% endfor %}
+                                </td>
+
+                                  <td>{{ note.author.username }}</td>
                                   <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
                                   <td>{{ note.course }}</td>
-                                  <td>{{ note.author.username }}</td>
                                   <td>{{ note.descript }}</td>
+                                  
                               </tr>
                           {% endfor %}
                       </tbody>

@@ -4,6 +4,43 @@
 
 {% block body %}
 <style> 
+
+    .scrollbar {
+margin-left: 30px;
+float: left;
+height: 700px;
+width: 940px;
+background: #fff;
+overflow-y: scroll;
+margin-bottom: 25px;
+}
+.force-overflow {
+min-height: 450px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(25, 95, 161, 0.2);
+background-color: #4285F4; }
+
+.scrollbar-secondary::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(25, 95, 161, 0.2);
+background-color: #F5F5F5;
+border-radius: 10px; }
+
+.scrollbar-secondary::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-secondary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(25, 95, 161, 0.2);
+background-color: rgba(25, 95, 161, 0.2); }
+
   .gradient-custom-2 {
   /* fallback for old browsers */
   background: #fccb90;
@@ -33,13 +70,15 @@
           <div class="col-12 col-md-9 col-lg-10 col-xl-10">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-10">
-                
-                
-                <!-- Note Overview -->
+                <div class="scrollbar scrollbar-secondary">
+                  <!-- Note Overview -->
                 <div>
+                  <h4 class="text-center mb-4 pb-2">Comment Section For {{ note.title }} Notes</h4>
+
                   <table class="table table-striped">
                       <thead>
                           <tr>
+                              
                               <th scope="col">Note Title</th>
                               <th scope="col">Course Name</th>
                               <th scope="col">Author</th>
@@ -48,6 +87,8 @@
                       </thead>
                       <tbody>
                                 <tr>
+                                  
+                                  
                                     <td><a href="/single_note/{{ note.note_id }}">{{ note.title }}</a></td>
                                     <td>{{ note.course }}</td>
                                     <td>{{ note.author.username }}</td>
@@ -58,61 +99,71 @@
                 </div>
 
                 <!-- Comment Form -->
-                <h4 class="mb-5">Comments</h4>
-                <form action="/notes/{{ note.note_id }}/comments" method="post" class="mb-5">
-                  <div class="input-group">
-                    <input type="text" name="comment" id="comment" class="form-control" placeholder = "Add a comment" autocomplete="off" required>
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-primary gradient-custom-2">Submit</button>
-                    </div>
-                  </div>
-                </form>
-                <!--View Comments-->
-                <style>
-                  .scroll-bar {
-                    overflow:scroll;
-                    height:400px;
-                  }
-                </style>
-                <div class="scroll-bar">
-                  <table style="width: 100%" class="table">
-                    <colgroup>
-                      <col span="1" style="width: 50%;">
-                      <col span="1" style="width: 20%;">
-                      <col span="1" style="width: 20%;">
-                      <col span="1" style="width: 10%;">
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th>Comment</th>
-                        <th>Author</th>
-                        <th>Posted</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for comment in comments %}
-                        <tr>
-                          
-                          <td>{{ comment.content }}</td>
-                          <td>{{ comment.username }} </td>
-                          <td>{{ comment.time_stamp }}</td>
-                          
-                          
-                         <!-- <td>{{ comment.comment_id }}</td>
-                              <td><a href="/comment/{{ comment.comment_id }}">{{ comment.comment_id }}</a></td>
-                         -->
-                         
-                          {% if user == comment.username %}
-                            <td><a href="/comment/{{ comment.comment_id }}/edit">edit </td>
-                          {% else %}
-                            <td>     </td>
-                          {% endif %}
+                <section class="">
+                  
+                    
+                  <div class="card-body p-4">
+                    <h4 class="text-center mb-4 pb-2">Comment Section </h4>
+                    {% for comment in comments %}
+                    <div class="row mb-3">
+                      <div class="col">
+                        <div class="d-flex flex-start">
+                          <!-- code for the profile_pics of other users-->
+                          {% for all_users in users %}
+                            {% if all_users.username == comment.username %}
 
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
+                          <img class="rounded-circle shadow-1-strong me-4"
+                            src="{{all_users.profile_pic}}" alt="avatar" width="65"
+                            height="65" />
+                            
+                            {% endif %}
+                            {% endfor %}
+                          <div class="flex-grow-1 flex-shrink-1">
+                            <div>
+                              <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-1">
+                                  
+                      
+                                  {{ comment.username }} <span class="small">- {{ comment.time_stamp }}</span>
+                                </p>
+                                {% if user == comment.username %}
+                                <a href="#!"><i class=""></i><span class="small"> </span></a>
+                                    <td><a href="/comment/{{ comment.comment_id }}/edit">edit </a>
+                                    </td>
+                                  {% else %}
+                                    <td>     </td>
+                                  {% endif %}
+
+                                </tr>
+                              </div>
+                              <p class="small mb-0">
+                                {{ comment.content }}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                        <!-- Comment Form -->
+                        <h4 class="mb-2"> Add Comments </h4>
+                        <form action="/notes/{{ note.note_id }}/comments" method="post" class="mb-5">
+                          <div class="input-group">
+                            <input type="text" name="comment" id="comment" class="form-control" placeholder = "Add a comment" autocomplete="off" required>
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-primary gradient-custom-2">Submit</button>
+                            </div>
+                            
+                            <ul class=" mb-15"></ul>
+                          </div>
+                        </form>
+                      </div>
+                  </div>
+                </section> 
+                </div>
+                
+                
+                    
                 </div>
               </div>
               </div>

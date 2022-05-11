@@ -116,7 +116,7 @@
   background: #fccb90;
 
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, #68625e, rgba(240, 149, 128, 0.2), #dd3675, #b44593);
+  background: -webkit-linear-gradient(to right, rgba(25, 95, 161, 0.2), #9582a1, #2e3891, #7e5973);
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, rgba(25, 95, 161, 0.2), #9582a1, #2e3891, #7e5973);
@@ -205,81 +205,67 @@
                   
                   
                   
-                  <section class="gradient-custom">
-                    <div class="container  py-5">
-                      <div class="row d-flex justify-content-center">
-                        <div class="col-md-12 col-lg-10 col-xl-8">
-                          
-                          <div class="card">
-                            <div class="card-body p-4">
-                              <h4 class="text-center mb-4 pb-2">Comment Section </h4>
-                              {% for comment in comments %}
-                              <div class="row mb-3">
-                                <div class="col">
-                                  <div class="d-flex flex-start">
-                                    <!-- code for the profile_pics of other users-->
-                                    {% for all_users in users %}
-                                      {% if all_users.username == comment.username %}
-    
-                                    <img class="rounded-circle shadow-1-strong me-4"
-                                      src="{{all_users.profile_pic}}" alt="avatar" width="65"
-                                      height="65" />
-                                     
-                                      {% endif %}
-                                      {% endfor %}
-                                    <div class="flex-grow-1 flex-shrink-1">
-                                      <div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                          <p class="mb-1">
-                                            
-                                
-                                            {{ comment.username }} <span class="small">- {{ comment.time_stamp }}</span>
-                                          </p>
-                                          {% if user == comment.username %}
-                                              <td><a href="/comment/{{ comment.comment_id }}/edit">edit 
-                                                
-                                              </td>
-                                            {% else %}
-                                              <td>     </td>
-                                            {% endif %}
-  
-                                          </tr>
-                                        
-                                          <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
-                                        </div>
-                                        <p class="small mb-0">
-                                          {{ comment.content }}
-                                        </p>
-                                      </div>
+                  <section class="">
                   
-                                    
-                                    </div>
+                    
+                    <div class="card-body p-4">
+                      <h4 class="text-center mb-4 pb-2">Comment Section </h4>
+                      {% for comment in comments %}
+                      <div class="row mb-3">
+                        <div class="col">
+                          <div class="d-flex flex-start">
+                            <!-- code for the profile_pics of other users-->
+                            {% for all_users in users %}
+                              {% if all_users.username == comment.username %}
   
+                            <img class="rounded-circle shadow-1-strong me-4"
+                              src="{{all_users.profile_pic}}" alt="avatar" width="65"
+                              height="65" />
+                              
+                              {% endif %}
+                              {% endfor %}
+                            <div class="flex-grow-1 flex-shrink-1">
+                              <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <p class="mb-1">
                                     
-                                  </div>
-                                    </div>
-                                  </div>
-                                  {% endfor %}
-                                  <!-- Comment Form -->
-                                  <h4 class="mb-2"> add comment </h4>
-                                  <form action="/single_note/{{ note.note_id }}" method="post" class="mb-5">
-                                    <div class="input-group">
-                                      <input type="text" name="comment" id="comment" class="form-control" placeholder = "Add a comment" autocomplete="off" required>
-                                      <div class="input-group-append">
-                                        <button type="submit" class="btn btn-primary gradient-custom-2">Submit</button>
-                                      </div>
-                                      
-                                      <ul class=" mb-15"></ul>
-                                    </div>
-                                  </form>
+                        
+                                    {{ comment.username }} <span class="small">- {{ comment.time_stamp }}</span>
+                                  </p>
+                                  {% if user == comment.username %}
+                                  <a href="#!"><i class=""></i><span class="small"> </span></a>
+                                      <td><a href="/comment/{{ comment.comment_id }}/edit">edit </a>
+                                      </td>
+                                    {% else %}
+                                      <td>     </td>
+                                    {% endif %}
+  
+                                  </tr>
                                 </div>
+                                <p class="small mb-0">
+                                  {{ comment.content }}
+                                </p>
                               </div>
                             </div>
                           </div>
-                        
-                      </div>
+                            </div>
+                          </div>
+                          {% endfor %}
+                          <!-- Comment Form -->
+                          <h4 class="mb-2"> Add Comments </h4>
+                          <form action="/single_note/{{ note.note_id }}" method="post" class="mb-5">
+                            <div class="input-group">
+                              <input type="text" name="comment" id="comment" class="form-control" placeholder = "Add a comment" autocomplete="off" required>
+                              <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary gradient-custom-2">Submit</button>
+                              </div>
+                              
+                              <ul class=" mb-15"></ul>
+                            </div>
+                          </form>
+                        </div>
                     </div>
-                  </section>     
+                  </section>       
               </div>
               
               <!-- start of single notes code -->

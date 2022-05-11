@@ -5,11 +5,22 @@
 {% block body %}
 <style> 
 
+.padding {
+
+margin-left: -10px;
+float: left;
+height: 570px;
+width: 550px;
+background: #fff;
+
+margin-bottom: 25px;
+}
+
 .scrollbar {
-margin-left: 30px;
+margin-left: 40px;
 float: left;
 height: 500px;
-width: 470px;
+width: 450px;
 background: #fff;
 overflow-y: scroll;
 margin-bottom: 25px;
@@ -64,14 +75,14 @@ background-color: #aa66cc; }
 
 <section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/26mkhTKYBbyy8904g/giphy.gif?cid=790b7611af2cc6bd64265faa1f01c20c3ec48928f42f394b&rid=giphy.gif&ct=g');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
+    <div class="container h-100 ">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <div class="scrollbar scrollbar-primary">
+        <div class="col-10 col-md-10 col-lg-10 col-xl-5 ">
+          <div class="card-body p-3 padding" style="border-radius: 15px;">
+            <div class="  ">
+              <div class="scrollbar scrollbar-primary ">
                 <!-- search notes code-->
+                <h1 class="mb-5"></h1>  
               <h1 class="mb-5">Search Notes</h1>
               <form action="/search" method="get" class="mb-5">
                 <!-- <label for="q" class="form-label">Search by title</label> -->  

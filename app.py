@@ -234,10 +234,11 @@ def single_note_likes_post(note_id):
 @app.get('/notes/list')
 def view_all_notes():
     all_notes = note_repository_singleton.get_all_notes()
+    users = user_repository_singleton.get_all_user()
     if 'user' in session:
         creator_id = session['user']['user_id']
         profile = user_repository_singleton.get_user_by_id(creator_id)
-        return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes, profile=profile, user=session['user']['username'])
+        return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes, users=users, profile=profile, user=session['user']['username'])
     return render_template('view_all_notes.html', list_notes_active=True, notes=all_notes)
 
 #edit notes page 
@@ -318,6 +319,7 @@ def view_comments(note_id):
     profile = user_repository_singleton.get_user_by_id(creator_id)
     single_note = note_repository_singleton.get_note_by_id(note_id)
     comment = note_repository_singleton.get_comments(note_id)
+    users = user_repository_singleton.get_all_user()
     if request.method == 'POST':
         content = request.form.get('comment','')
         time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
@@ -326,7 +328,7 @@ def view_comments(note_id):
         commenter_id = session['user']['user_id']
         note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id, commenter_id=commenter_id)
         comment = note_repository_singleton.get_comments(note_id)
-    return render_template('comments.html', note=single_note, comments = comment, profile = profile, user=session['user']['username'])
+    return render_template('comments.html', note=single_note, comments = comment, profile = profile, users=users, user=session['user']['username'])
 
 #get single Comment
 @app.get('/comment/<comment_id>')
