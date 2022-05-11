@@ -115,7 +115,7 @@ def signup():
     email = request.form.get('email', '')
     password = request.form.get('pw', '')
     repeat_pw = request.form.get('pw2', '' )
-    profile_pic = request.form.get('profile_pic', '' )
+    profile_pic = request.form.get('profile_pic', 'https://media2.giphy.com/media/l1fDKnffMrl6TUQRVS/giphy.gif' )
 
     if password != repeat_pw or username == '' or password == '' or repeat_pw == '':
         abort(400)
@@ -362,8 +362,11 @@ def edit_user_page(user_id):
 # edit username and email
 @app.post('/edit/user/<user_id>')
 def edit_user(user_id):
+
     if 'user' not in session:
         abort(401)
+    creator_id = session['user']['user_id']
+    profile = user_repository_singleton.get_user_by_id(creator_id)
     user_to_edit = user_repository_singleton.get_user_by_id(user_id)    
     user_to_edit.username = request.form.get('username', '')
     user_to_edit.email = request.form.get('email', '')
@@ -376,7 +379,7 @@ def edit_user(user_id):
     'username': user_to_edit.username,
     'user_id': user_id
     }
-    return redirect('/dashboard')
+    return render_template('edit_user_info.html', edit_login_active=True, profile=profile, user=session['user']['username'], user_to_edit=user_to_edit)
 
 # edit password page
 @app.get('/edit/<user_id>/password/page')
