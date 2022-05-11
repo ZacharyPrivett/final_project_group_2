@@ -177,7 +177,7 @@ def search_notes():
         profile = user_repository_singleton.get_user_by_id(creator_id)
         return render_template('search_notes.html', search_active=True, notes=found_notes, profile=profile, search_query=q, user=session['user']['username'])
     return render_template('search_notes.html', search_active=True, notes=found_notes, search_query=q)
-  
+
 #Single Notes
 @app.route('/single_note/<note_id>', methods=['GET', 'POST'])
 def single_note(note_id):
@@ -192,7 +192,8 @@ def single_note(note_id):
         time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
         thread_id = note_id
         username = session['user']['username']
-        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
+        commenter_id = session['user']['user_id']
+        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id, commenter_id=commenter_id)
         comment = note_repository_singleton.get_comments(note_id)
     if 'user' in session:
         creator_id = session['user']['user_id']
@@ -322,7 +323,8 @@ def view_comments(note_id):
         time_stamp = datetime.utcnow().strftime('%B %d %Y - %H:%M')
         thread_id = note_id
         username = session['user']['username']
-        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id)
+        commenter_id = session['user']['user_id']
+        note_repository_singleton.create_comment(content=content, time_stamp=time_stamp, username=username, thread_id=thread_id, commenter_id=commenter_id)
         comment = note_repository_singleton.get_comments(note_id)
     return render_template('comments.html', note=single_note, comments = comment, profile = profile, user=session['user']['username'])
 
