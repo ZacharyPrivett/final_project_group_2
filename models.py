@@ -10,10 +10,12 @@ class Users(db.Model):
     email = db.Column(db.String, unique=True, nullable=False)
     profile_pic = db.Column(db.Text, nullable=False)
     pw = db.Column(db.String, nullable=False)
-    # A user can have many notes
+    # When looping through notes, use author to access user table
     user_notes = db.relationship('Note', backref='author')
     # Deletes users notes when account is deleted
     delete = db.relationship('Note', cascade='all, delete-orphan')
+    # Deletes users comments when account is deleted
+    cascade_comment = db.relationship('Comments', cascade='all, delete-orphan')
 
 class Note(db.Model):
     __tablename__ = 'Note'
