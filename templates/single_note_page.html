@@ -68,7 +68,7 @@
                   </p>
                 </div>
               </div>
-             
+              {% if user == note.author.username %}
               <a href="/notes/{{ note.note_id }}/edit">
                 <div class="text-center pt-1 mb-1 pb-1">
                   <!-- start of login button, create a block that only brings you to the dashboard page when given the right info-->
@@ -76,11 +76,12 @@
                   <!-- end of login button-->       
                 </div>
               </a>
+              {% endif %}
               <!-- end of single notes code-->
               <!-- go to comments-->
               <a href="/notes/{{ note.note_id }}/comments">
                
-                <div class="text-center pt-1 mb-5 pb-1">
+                <div class="text-center pt-1 mb-4 pb-1">
                   <!-- start of login button, create a block that only brings you to the dashboard page when given the right info-->
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-1" type="submit">View Comments</button>
                   <!-- end of login button-->       

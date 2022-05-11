@@ -3,7 +3,29 @@
 {% block title %}Edit User Info{% endblock %}
 
 {% block body %}
-<section class="vh-100 bg-image" style="background-image: url('https://media2.giphy.com/media/26mkhTKYBbyy8904g/giphy.gif?cid=790b7611af2cc6bd64265faa1f01c20c3ec48928f42f394b&rid=giphy.gif&ct=g');">
+<style>
+  .gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #2b41be, rgba(240, 149, 128, 0.2), #dd3675, #b44593);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(25, 95, 161, 0.2), #3670b3, #505583, #31125a);
+  }
+
+  .tiledBackground {
+      background-image: url(https://www.mozilla.org/media/img/logos/firefox/logo-quantum.9c5e96634f92.png);
+      background-size: 150px;
+      width: 300px;
+      height: 300px;
+      border: 2px solid;
+      color: pink;
+  }
+
+</style>
+<section class="vh-100 bg-image" style="background-image: url('https://media4.giphy.com/media/3ohhwGGrCD9wCQ5cwU/giphy.gif?cid=ecf05e47eajgtbfkyixcwgv4xw0ohytzwmzpfdsxq92ketgn&rid=giphy.gif&ct=g');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -24,13 +46,13 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="text" name="email" id="email" class="form-control" autocomplete="off" required value="{{ user_to_edit.email }}">
                     </div>      
-                      <button type="submit" class="btn btn-primary mb-3 mt-3">Update</button>     
+                      <button type="submit" class="btn btn-primary gradient-custom-2 mb-3 mt-3">Update</button>     
                   </form>
                   <form action="/edit/{{ session['user']['user_id'] }}/password/page" method="get">
-                    <button type="submit" class="btn btn-success mb-3">Change Password</button>
+                    <button type="submit" class="btn btn-success gradient-custom-2 mb-3">Change Password</button>
                   </form>
                 <form action="/delete/user/{{ session['user']['user_id'] }}/page" method="get">
-                    <button type="submit" class="btn btn-danger mb-6">Delete User</button>
+                    <button type="submit" class="btn btn-danger gradient-custom-2 mb-6">Delete User</button>
                 </form>
               </div>
               <!-- search notes code ends here-->

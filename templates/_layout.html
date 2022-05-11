@@ -39,7 +39,9 @@
     
 
 
-  <!-- navbar for the v-->
+  <!-- navbar for the logged in user-->
+  {% if 'user' in session %}
+               
   <header class="bg-light text-center text-whit"> 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
@@ -81,13 +83,7 @@
               <a class="nav-link" href="/about">About</a>
             </li>
   
-              <li class="nav-item">
-                <a class="nav-link" href="/logout/page">Logout</a>
-              </li>
-              {% if 'user' in session %}
-              <li class="nav-item">
-                <a class="nav-link" href="/dashboard"> {{ user }} </a>
-              {% endif%}  
+              
           
             </li>
             
@@ -109,13 +105,6 @@
             <li class="nav-item">
               <a class="nav-link" href="/logout/page">Logout</a>
             </li>
-              <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="/login/page">Login</a>
-              </li>
-              
-                <li class="nav-item">
-                  <a class="nav-link " aria-current="page" href="/signup">Signup</a>
-                </li>
 
               <!-- Avatar -->
               {% if 'user' in session %}
@@ -145,7 +134,7 @@
             <a class="dropdown-item" href="/dashboard">My profile</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" href="/edit/{{ session['user']['user_id'] }}/page">Settings</a>
           </li>
           <li>
             <a class="dropdown-item" href="/logout/page">Logout</a>
@@ -167,6 +156,107 @@
       </div>
     </nav>
   </header>
+  {% else%}
+  <!-- navbar for the signed out user-->
+  <header class="bg-light text-center text-whit"> 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="/dashboard">Dashboard</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>              
+          
+            </li>
+            
+          </ul>
+        
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+            
+              <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="/login/page">Login</a>
+              </li>
+              
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="/signup">Signup</a>
+                </li>
+
+              <!-- Avatar -->
+              
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle d-flex align-items-center"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://media3.giphy.com/media/2yyGJIBKWtRuzQDyRi/giphy.gif?cid=790b7611a778ee4f90f72d22abcf1748eb09bf171532ce00&rid=giphy.gif&ct=g"
+            class="rounded-circle"
+            height="22"
+            alt="    "
+            loading="lazy"
+          />
+        
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <a class="dropdown-item" href="/dashboard">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/logout/page">Logout</a>
+            
+          </li>
+          </span>
+          </ul>
+          
+        </div>
+      </div>
+      
+     
+          
+      </div>
+    </nav>
+  </header>
+
+  {% endif%}  
        
     <div class="container pt-4">
         <!-- Navbar -->
